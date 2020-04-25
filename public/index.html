@@ -5,6 +5,7 @@
 <!--CSS-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/style.css">
 
 
 <head>
@@ -12,8 +13,10 @@
     <title>Title</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">FreeLab</a>
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="assets/img/logo.png" alt="Logo" style="height:50px;">
+    </a>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -38,7 +41,7 @@
 
 </nav>
 
-<div class="row" style="padding: 10px">
+<div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <div class="jumbotron">
@@ -56,9 +59,9 @@
 
         </div>
     </div>
-    <div class="col-m-1"></div>
+    <div class="col-md-1"></div>
 </div>
-<div class="row" style="padding: 10px">
+<div class="row" >
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -67,12 +70,15 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="max-height: 500px !important;">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="https://i.imgur.com/KmpBtv9.jpg" alt="First slide">
+                    <img class="d-block w-100" src="assets/img/49547737438_453ca1a298_o.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="https://i.imgur.com/qpJKmsq.jpg" alt="Second slide">
+                    <img class="d-block w-100" src="assets/img/49547737238_0a866fee39_o.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="assets/img/49547738148_26c7e2e684_o.jpg" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -87,6 +93,58 @@
     </div>
     <div class="col-m-1"></div>
 </div>
+
+
+<!-- Footer -->
+<footer class="page-footer font-small bg-light pt-4">
+
+
+    <!-- Grid row -->
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">address</h5>
+                    <p class="card-text">address</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid column -->
+        <div class="col-md-3 ml-auto mr-auto ">
+            <div class="d-flex">
+                <ul class="list-unstyled mx-auto justify-content-center">
+                    <li class="list-unstyled">
+                        <a href="#">Contact Form</a>
+                    </li>
+                    <li class="list-unstyled">
+                        <a href="#">FAQ</a>
+                    </li>
+                    <li class="list-unstyled">
+                        <a href="#">Partners</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- Grid column -->
+
+        <div class="col-md-2"></div>
+
+
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+
+        <!-- Copyright -->
+    </div>
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/"> martinaperepere.net</a>
+    </div>
+
+</footer>
+<!-- Footer -->
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
