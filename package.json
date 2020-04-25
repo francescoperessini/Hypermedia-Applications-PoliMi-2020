@@ -4,16 +4,26 @@
   "description": "<p align=\"center\">\r   <img width=\"100%\" src=\"https://i.imgur.com/tm9mSuM.png\" alt=\"header\" />\r </p>\r <p align=\"center\">\r     <img src=\"https://i.imgur.com/mPb3Qbd.gif\" width=\"180\" alt=\"Politecnico di Milano\"/>\r </p>",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "npm install",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/francescoperessini/Hypermedia-Applications-PoliMi-2020.git"
   },
+  "keywords": [
+    "swagger"
+  ],
   "author": "Martina Peressini Peresson",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/francescoperessini/Hypermedia-Applications-PoliMi-2020/issues"
   },
-  "homepage": "https://github.com/francescoperessini/Hypermedia-Applications-PoliMi-2020#readme"
+  "homepage": "https://github.com/francescoperessini/Hypermedia-Applications-PoliMi-2020#readme",
+  "dependencies": {
+    "swagger": "^0.7.5"
+  },
+  "devDependencies": {
+    "swagger-node-codegen": "^1.6.3"
+  }
 }
