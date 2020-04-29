@@ -13,3 +13,9 @@
   height: 200px;
   width: 200px;
 }
+
+.month-card{
+  background-color: rgba(84,83,85,0.77);
+  color: white;
+  border-radius: 0px;
+}
