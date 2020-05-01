@@ -14,6 +14,11 @@
   width: 200px;
 }
 
+.event-image{
+  max-height: 400px;
+  max-width: 400px;
+}
+
 .month-card{
   background-color: rgba(84,83,85,0.77);
   color: white;
