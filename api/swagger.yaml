@@ -1,0 +1,335 @@
+---
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "FreeLab Swagging Swagger APIs"
+  contact:
+    email: "test@test.it"
+host: "localhost"
+basePath: "/v1"
+tags:
+- name: "person"
+  description: "Operations about user"
+  externalDocs:
+    description: "Find out more about users"
+    url: "http://localhost"
+- name: "event"
+  description: "Operations about event"
+  externalDocs:
+    description: "Find out more about our events"
+    url: "http://localhost"
+- name: "service"
+  description: "Operations about event"
+  externalDocs:
+    description: "Find out more about our services"
+    url: "http://localhost"
+schemes:
+- "http"
+paths:
+  /people:
+    get:
+      tags:
+      - "person"
+      summary: "Get all the users"
+      description: "This can be done by everyone"
+      operationId: "RetrieveUsers"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK!"
+        "400":
+          description: "Bad request"
+        "500":
+          description: "Server down"
+      x-swagger-router-controller: "Person"
+  /person/by_id/{id}:
+    get:
+      tags:
+      - "person"
+      summary: "Get user by id"
+      description: ""
+      operationId: "getUserByID"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Person"
+        "400":
+          description: "Bad request"
+        "500":
+          description: "Server down"
+      x-swagger-router-controller: "Person"
+  /event/by_month/{month}:
+    get:
+      tags:
+      - "event"
+      summary: "Get events by month"
+      description: ""
+      operationId: "getEventsByMonth"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "month"
+        in: "path"
+        description: "The month that needs to be fetched."
+        required: true
+        type: "string"
+        enum:
+        - "jan"
+        - "feb"
+        - "mar"
+        - "apr"
+        - "may"
+        - "jun"
+        - "jul"
+        - "aug"
+        - "sep"
+        - "oct"
+        - "nov"
+        - "dec"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request"
+        "500":
+          description: "Server down"
+      x-swagger-router-controller: "Event"
+  /event/by_id/{id}:
+    get:
+      tags:
+      - "event"
+      summary: "Get events by id"
+      description: ""
+      operationId: "getEventById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request"
+        "500":
+          description: "Server down"
+      x-swagger-router-controller: "Event"
+  /services:
+    get:
+      tags:
+      - "service"
+      summary: "Get all the services"
+      description: "This can be done by everyone"
+      operationId: "RetrievesServices"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK!"
+        "400":
+          description: "Bad request"
+        "500":
+          description: "Server down"
+      x-swagger-router-controller: "Service"
+  /service/by_id/{id}:
+    get:
+      tags:
+      - "service"
+      summary: "Get service by id"
+      description: ""
+      operationId: "getServiceById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Service"
+        "400":
+          description: "Bad request"
+        "500":
+          description: "Server down"
+      x-swagger-router-controller: "Service"
+definitions:
+  Person:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "integer"
+        format: "int64"
+      surname:
+        type: "integer"
+        format: "int32"
+      description:
+        type: "string"
+        format: "int64"
+      image_url:
+        type: "string"
+        description: "URL of the profile image"
+      services:
+        type: "array"
+        items:
+          $ref: "#/definitions/Service"
+      events:
+        type: "array"
+        items:
+          $ref: "#/definitions/Event"
+    example:
+      surname: 1
+      image_url: "image_url"
+      name: 6
+      description: "description"
+      id: 0
+      services:
+      - presentation: "presentation"
+        name: "name"
+        image_urls:
+        - "image_urls"
+        - "image_urls"
+        practical_info: "practical_info"
+        id: 5
+        events:
+        - presentation: "presentation"
+          image_url: "image_url"
+          event_date: "2000-01-23T04:56:07.000+00:00"
+          name: "name"
+          practical_info: "practical_info"
+          id: 5
+        - presentation: "presentation"
+          image_url: "image_url"
+          event_date: "2000-01-23T04:56:07.000+00:00"
+          name: "name"
+          practical_info: "practical_info"
+          id: 5
+      - presentation: "presentation"
+        name: "name"
+        image_urls:
+        - "image_urls"
+        - "image_urls"
+        practical_info: "practical_info"
+        id: 5
+        events:
+        - presentation: "presentation"
+          image_url: "image_url"
+          event_date: "2000-01-23T04:56:07.000+00:00"
+          name: "name"
+          practical_info: "practical_info"
+          id: 5
+        - presentation: "presentation"
+          image_url: "image_url"
+          event_date: "2000-01-23T04:56:07.000+00:00"
+          name: "name"
+          practical_info: "practical_info"
+          id: 5
+      events:
+      - presentation: "presentation"
+        image_url: "image_url"
+        event_date: "2000-01-23T04:56:07.000+00:00"
+        name: "name"
+        practical_info: "practical_info"
+        id: 5
+      - presentation: "presentation"
+        image_url: "image_url"
+        event_date: "2000-01-23T04:56:07.000+00:00"
+        name: "name"
+        practical_info: "practical_info"
+        id: 5
+  Event:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      event_date:
+        type: "string"
+        format: "date-time"
+      practical_info:
+        type: "string"
+      image_url:
+        type: "string"
+        description: "URL of the event image"
+      presentation:
+        type: "string"
+      organizer:
+        $ref: "#/definitions/Person"
+      service:
+        $ref: "#/definitions/Service"
+    example:
+      presentation: "presentation"
+      image_url: "image_url"
+      event_date: "2000-01-23T04:56:07.000+00:00"
+      name: "name"
+      practical_info: "practical_info"
+      id: 5
+  Service:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      presentation:
+        type: "string"
+      image_urls:
+        type: "array"
+        items:
+          type: "string"
+      practical_info:
+        type: "string"
+      events:
+        type: "array"
+        items:
+          $ref: "#/definitions/Event"
+    example:
+      presentation: "presentation"
+      name: "name"
+      image_urls:
+      - "image_urls"
+      - "image_urls"
+      practical_info: "practical_info"
+      id: 5
+      events:
+      - presentation: "presentation"
+        image_url: "image_url"
+        event_date: "2000-01-23T04:56:07.000+00:00"
+        name: "name"
+        practical_info: "practical_info"
+        id: 5
+      - presentation: "presentation"
+        image_url: "image_url"
+        event_date: "2000-01-23T04:56:07.000+00:00"
+        name: "name"
+        practical_info: "practical_info"
+        id: 5
