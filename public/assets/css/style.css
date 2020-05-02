@@ -24,3 +24,9 @@
   color: white;
   border-radius: 0px;
 }
+
+.events-card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
