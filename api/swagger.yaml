@@ -33,7 +33,7 @@ paths:
       - "person"
       summary: "Get all the users"
       description: "This can be done by everyone"
-      operationId: "RetrieveUsers"
+      operationId: "retrieveUsers"
       produces:
       - "application/json"
       parameters: []

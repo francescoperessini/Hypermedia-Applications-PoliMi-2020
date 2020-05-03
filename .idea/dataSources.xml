@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="dbb2aa6skut733@ec2-46-137-177-160.eu-west-1.compute.amazonaws.com" uuid="2e684730-50f9-4c62-95db-abb3eb3ac7ec">
+    <data-source source="LOCAL" name="db-hyper" uuid="7662509b-d913-4809-803c-179638c0c54d">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
+      <remarks>merda</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/dbb2aa6skut733</jdbc-url>
     </data-source>
