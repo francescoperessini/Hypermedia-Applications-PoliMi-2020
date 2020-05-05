@@ -6,7 +6,7 @@ info:
   title: "FreeLab Swagging Swagger APIs"
   contact:
     email: "test@test.it"
-host: "localhost"
+host: "martina-peressini-peresson.herokuapp.com"
 basePath: "/v1"
 tags:
 - name: "person"
