@@ -4,48 +4,6 @@ $.urlParam = function (name) {
     return results[1] || "jan";
 };
 
-//fill the template of a single book
-function fillBook(book) {
-    const img = "../assets/images/books/" + book.book.imgpath;
-    const title = book.book.title;
-    const book_link = "/pages/book.html?id=" + book.book_id;
-
-    return `<div class="card author-book-card">
-                        <a class="outgoing" href="` + book_link + `"><img class="card-img-top" src="` + img + `" alt="Card image cap"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">` + title + `</h5>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col padding-10px">
-                                    <a href="` + book_link + `" class="btn btn-big btn-outline-primary btn-sm outgoing">
-                                        <i class="fa fa-book"></i>
-                                        <div>View Book</div></a>
-                                </div>
-                                <div class="col padding-10px cart-btn-col">
-                                    <a id="` + book.book_id + `" href="#" class="btn btn-big btn-outline-primary btn-sm cart">
-                                        <i class="fa fa-shopping-cart"></i> <div>Add to cart</div></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-}
-
-//retrieve the author of the book and fill the template
-async function appendAuthor(author_id) {
-    let author;
-    try {
-        author = await (await fetch('/v2/authors/' + author_id)).json();
-    } catch (error) {
-        location.replace("/404.html");
-    }
-
-    $("#author-picture").attr("src", "../assets/images/authors/" + author.imgpath);
-    $("#author-name").text(author.name + " " + author.surname);
-    $("title").text(author.name + " " + author.surname);
-    $("#biography").text(author.biography);
-}
-
 getCard = function (event) {
 
     let name = ""
@@ -139,7 +97,7 @@ async function eventByMonth(month) {
 
         }
 
-        if(i === num_events-1){
+        if (i === num_events - 1) {
             let emptySpace = 3 - (i % 4)
             console.log(emptySpace)
             if (emptySpace !== 4) {
@@ -153,12 +111,8 @@ async function eventByMonth(month) {
         i++
 
 
-
-
     })
     html += getRow(rowContent)
-
-
 
 
     $('#events').append(html);
