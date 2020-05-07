@@ -10,12 +10,11 @@ async function getPerson(id) {
     console.log(person)
     console.log("---------")
     console.log("-->" + person.name + "-->" + person.surname)
-    $('.name_surname').html(person.name +" "+ person.surname)
+    $('.name_surname').html(person.name + " " + person.surname)
     $("#brief_description").html(person.description.substring(1, 50))
     $("#description").html(person.description)
     document.getElementById("person_img").src = person.image_url
 }
-
 
 
 //retrieve the author id from URL and fill the page
