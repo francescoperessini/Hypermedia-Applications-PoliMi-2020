@@ -12,10 +12,10 @@ exports.getUserByID = function(id) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "surname" : 1,
-  "image_url" : "image_url",
-  "name" : 6,
-  "description" : "description",
+  "surname" : "Tribbiani",
+  "image_url" : "../assets/img/person.jpg",
+  "name" : "Joey",
+  "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel lectus et diam congue porta. Sed semper neque libero, eu suscipit odio aliquet ut. Integer velit metus, congue quis consequat in, molestie ac tortor. Nunc dignissim, libero id pretium aliquam, neque velit maximus mi, nec volutpat quam eros eu ligula. Ut ex magna, feugiat nec faucibus non, accumsan sit amet metus. Fusce congue neque et ligula gravida, at tristique risus accumsan. Nulla facilisis et tellus eget pulvinar. Nullam ligula nisi, lobortis at vestibulum quis, posuere eget turpis. Vivamus nec risus ex. Proin in tempus purus. Cras quam metus, rhoncus at mollis sed, imperdiet tincidunt risus. Pellentesque aliquam felis justo, eget euismod tellus bibendum non. Nam consequat vestibulum sem, sed gravida ligula aliquet nec. Morbi egestas lobortis sapien ac eleifend. Maecenas tincidunt ac mi sed viverra. Nulla ultrices pulvinar est, id fringilla diam egestas nec.",
   "id" : 0,
   "services" : [ {
     "presentation" : "presentation",
@@ -95,10 +95,10 @@ exports.retrieveUsers = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-      "surname" : 1,
+      "surname" : "Tribbiani",
       "image_url" : "image_url",
-      "name" : 6,
-      "description" : "description",
+      "name" : "Joey",
+      "description" : "description descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
       "id" : 0,
       "services" : [ {
         "presentation" : "presentation",
