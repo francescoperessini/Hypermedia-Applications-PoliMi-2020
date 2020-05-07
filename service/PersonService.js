@@ -98,7 +98,7 @@ exports.retrieveUsers = function() {
       "surname" : "Surname 1",
       "image_url" : "image_url",
       "name" : "Name 1",
-      "description" : "Bellaaaa",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate enim quis urna aliquet, eget venenatis risus ultricies. Praesent volutpat sodales orci, ut aliquet turpis tempus a. Nam cursus maximus elementum. Cras at nunc nec nulla viverra cursus. Pellentesque fermentum sagittis nunc quis fringilla. Mauris sollicitudin vel est eget consequat. Sed malesuada ultricies ultrices. Phasellus odio ante, lacinia vitae placerat ut, vehicula ut velit. Maecenas ullamcorper mi a lacus sagittis rutrum. Etiam sodales in nibh posuere scelerisque. Nullam iaculis aliquet felis non rhoncus.",
       "id" : 0,
       "services" : [ {
         "presentation" : "presentation",
@@ -162,7 +162,7 @@ exports.retrieveUsers = function() {
       "surname" : "Surname 2",
       "image_url" : "image_url",
       "name" : "Name 2",
-      "description" : "Bellaaaa",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate enim quis urna aliquet, eget venenatis risus ultricies. Praesent volutpat sodales orci, ut aliquet turpis tempus a. Nam cursus maximus elementum. Cras at nunc nec nulla viverra cursus. Pellentesque fermentum sagittis nunc quis fringilla. Mauris sollicitudin vel est eget consequat. Sed malesuada ultricies ultrices. Phasellus odio ante, lacinia vitae placerat ut, vehicula ut velit. Maecenas ullamcorper mi a lacus sagittis rutrum. Etiam sodales in nibh posuere scelerisque. Nullam iaculis aliquet felis non rhoncus.",
       "id" : 0,
       "services" : [ {
         "presentation" : "presentation",
@@ -226,7 +226,7 @@ exports.retrieveUsers = function() {
       "surname" : "Surname 3",
       "image_url" : "image_url",
       "name" : "Name 3",
-      "description" : "Bellaaaa",
+      "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate enim quis urna aliquet, eget venenatis risus ultricies. Praesent volutpat sodales orci, ut aliquet turpis tempus a. Nam cursus maximus elementum. Cras at nunc nec nulla viverra cursus. Pellentesque fermentum sagittis nunc quis fringilla. Mauris sollicitudin vel est eget consequat. Sed malesuada ultricies ultrices. Phasellus odio ante, lacinia vitae placerat ut, vehicula ut velit. Maecenas ullamcorper mi a lacus sagittis rutrum. Etiam sodales in nibh posuere scelerisque. Nullam iaculis aliquet felis non rhoncus.",
       "id" : 0,
       "services" : [ {
         "presentation" : "presentation",
