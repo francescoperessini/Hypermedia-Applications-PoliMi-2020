@@ -10,7 +10,7 @@ getRow = function(person, i){
             '                </div>\n' +
             '                <!--USER DESCRIPTION-->\n' +
             '                <div class="col-md-9 align-self-center text-center">\n' +
-            '                    <h4>'+ person.name + ' ' + person.surname +'</h4>\n' +
+            '                    <a href="/pages/person.html?id='+ person.id +'"> <h4>'+ person.name + ' ' + person.surname +'</h4></a>\n' +
             '                    <p class="mt-4">'+ person.description +'</p>\n' +
             '                </div>\n' +
             '            </div>\n' +
@@ -25,7 +25,7 @@ getRow = function(person, i){
             '            <div class="row badge-light " >\n' +
             '                <!--USER DESCRIPTION-->\n' +
             '                <div class="col-md-9 align-self-center text-center">\n' +
-            '                    <h4>'+ person.name + ' ' + person.surname +'</h4>\n' +
+            '                    <a href="/pages/person.html?id='+ person.id +'"> <h4>'+ person.name + ' ' + person.surname +'</h4></a>\n' +
             '                    <p class="mt-4">'+ person.description +'</p>\n' +
             '                </div>\n' +
             '                <!--USER PHOTO-->\n' +
