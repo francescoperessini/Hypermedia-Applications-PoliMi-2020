@@ -14,7 +14,7 @@ exports.getServiceById = function(id) {
     examples['application/json'] = {
   "presentation" : "presentation",
   "name" : "name",
-  "image_urls" : [ "image_urls", "image_urls" ],
+  "image_urls" : [ "../assets/img/sample/49547732753_0be8847913_o.jpg", "image_urls" ],
   "practical_info" : "practical_info",
   "id" : 5,
   "events" : [ {
