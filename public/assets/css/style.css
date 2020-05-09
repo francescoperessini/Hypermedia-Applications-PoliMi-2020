@@ -1,32 +1,32 @@
-.jumbotron{
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background: #d0d0d0;
+.jumbotron {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #d0d0d0;
 
 }
 
-.page-footer{
-  margin-top: 30px;
+.page-footer {
+    margin-top: 30px;
 }
 
-.custom-rounded-circle{
-  height: 200px;
-  width: 200px;
+.custom-rounded-circle {
+    height: 200px;
+    width: 200px;
 }
 
-.event-image{
-  max-height: 400px;
-  max-width: 400px;
+.event-image {
+    max-height: 400px;
+    max-width: 400px;
 }
 
-.month-card{
-  background-color: rgba(84,83,85,0.77);
-  color: white;
-  border-radius: 0px;
+.month-card {
+    background-color: rgba(84, 83, 85, 0.77);
+    color: white;
+    border-radius: 0px;
 }
 
 .events-card-img-top {
-  width: 100%;
-  height: 15vw;
-  object-fit: cover;
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
 }
