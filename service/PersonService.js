@@ -21,26 +21,11 @@ exports.personDbSetup = function (connection) {
  * id Long Id of the person to be retrieved.
  * returns Person
  **/
-exports.getUserByID = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = {
-            "id": 1,
-            "name": "Stefano",
-            "surname": "Maini",
-            "email": "stefano.maini@mail.com",
-            "telephone": "0123456789",
-            "description": "person description",
-            "leitmotiv": "It Won’t Fail Because of Me",
-            "skills": ["Python pro master", "Illustrator lover"],
-            "image_url": "image_url"
-        };
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+exports.getUserByID = async (id) => {
+    const user = await sqlDb("person").select("id", "name", "surname", "email", "telephone", "description", "leitmotiv",
+        "skills", "image_url").where("id", "=", id);
+    //TODO error handling
+
 }
 
 
@@ -115,35 +100,8 @@ exports.getUserServices = function (id) {
  *
  * returns List
  **/
-exports.retrieveUsers = function () {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [{
-            "id": 1,
-            "name": "Stefano",
-            "surname": "Maini",
-            "email": "stefano.maini@mail.com",
-            "telephone": "0123456789",
-            "description": "person description",
-            "leitmotiv": "It Won’t Fail Because of Me",
-            "skills": ["Python pro master", "Illustrator lover"],
-            "image_url": "image_url"
-        }, {
-            "id": 1,
-            "name": "Stefano",
-            "surname": "Maini",
-            "email": "stefano.maini@mail.com",
-            "telephone": "0123456789",
-            "description": "person description",
-            "leitmotiv": "It Won’t Fail Because of Me",
-            "skills": ["Python pro master", "Illustrator lover"],
-            "image_url": "image_url"
-        }];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+exports.retrieveUsers = async () => {
+    return await sqlDb("person").select("id", "name", "surname", "email", "telephone", "description", "leitmotiv",
+        "skills", "image_url")
 }
 

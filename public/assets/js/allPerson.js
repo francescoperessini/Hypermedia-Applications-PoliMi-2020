@@ -43,8 +43,7 @@ getRow = function (person, i) {
 
 async function getPeople() {
     const people = await (await fetch('/v1/people/')).json();
-    console.log(people)
-    html = ""
+    let html = ""
     let i = 0
     people.forEach((person) => {
         html += getRow(person, i)
@@ -55,11 +54,7 @@ async function getPeople() {
 }
 
 
-//retrieve the author id from URL and fill the page
 $(async function () {
-    getPeople()
-
-
+    await getPeople()
 });
-
 

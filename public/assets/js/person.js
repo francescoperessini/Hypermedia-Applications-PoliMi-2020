@@ -7,7 +7,7 @@ $.urlParam = function (name) {
 
 async function getPerson(id) {
     const person = await (await fetch('/v1/person/by_id/' + id)).json();
-    console.log(person)
+    console.log(person.name)
     console.log("---------")
     console.log("-->" + person.name + "-->" + person.surname)
     $('.name_surname').html(person.name + " " + person.surname)
@@ -17,13 +17,9 @@ async function getPerson(id) {
 }
 
 
-//retrieve the author id from URL and fill the page
 $(async function () {
     const person_id = $.urlParam("id");
     console.log(person_id)
-    getPerson(person_id)
-
-
+    await getPerson(person_id)
 });
-
 
