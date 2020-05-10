@@ -61,6 +61,7 @@ getEmptyCard = function () {
 
 }
 getRow = function (rowContent) {
+
     let html = '<div class="row mt-3">\n' +
         '    <div class="col-md-1"></div>\n' +
         '    <div class="col-md-10">\n' +
@@ -94,21 +95,18 @@ async function eventByMonth(month) {
 
         } else {
             rowContent += getCard(event)
-
         }
 
         if (i === num_events - 1) {
             let emptySpace = 3 - (i % 4)
-            console.log(emptySpace)
             if (emptySpace !== 4) {
                 for (const _ of Array(emptySpace).keys()) {
                     rowContent += getEmptyCard()
                 }
             }
-
-
         }
         i++
+
 
 
     })
@@ -119,7 +117,6 @@ async function eventByMonth(month) {
 }
 
 
-//retrieve the author id from URL and fill the page
 $(async function () {
     const month = $.urlParam("month");
     eventByMonth(month)

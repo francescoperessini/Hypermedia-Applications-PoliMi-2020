@@ -1,5 +1,20 @@
 'use strict';
+const ErrorMessage = require("./ErrorMessage");
 
+let sqlDb;
+
+exports.serviceDbSetup = function (connection) {
+    sqlDb = connection;
+    console.log("Checking if the service table exists...");
+    return sqlDb.schema.hasTable("service").then((exists) => {
+        if (!exists) {
+            console.log("Creating service table...");
+            //TODO create the Person table if it doesn't exist
+        } else {
+            console.log("Service table already into the database!")
+        }
+    })
+}
 
 /**
  * Returns the service by its ID
@@ -7,23 +22,12 @@
  * id Long Id of the service to be retrieved.
  * returns Service
  **/
+
 exports.getServiceById = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = {
-            "id": 1,
-            "name": "service name",
-            "presentation": "service presentation",
-            "practical_info": "service practical_info",
-            "images_url": ["image_url_1", "image_url_2", "image_url_3"]
-        };
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let query = sqlDb("service").select().where({id: id});
+    return getPromiseForQuery(query,id)
 }
+
 
 
 /**
@@ -33,31 +37,9 @@ exports.getServiceById = function (id) {
  * returns List
  **/
 exports.getServiceEvents = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [{
-            "id": 1,
-            "name": "event name",
-            "date_time": "2017-07-21T17:32:28Z",
-            "presentation": "event presentation",
-            "practical_info": "event practical_info",
-            "skill_level": "skill level required",
-            "image_url": "image_url"
-        }, {
-            "id": 1,
-            "name": "event name",
-            "date_time": "2017-07-21T17:32:28Z",
-            "presentation": "event presentation",
-            "practical_info": "event practical_info",
-            "skill_level": "skill level required",
-            "image_url": "image_url"
-        }];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let subquery = sqlDb("service_to_event").select("event_id").where({service_id: id})
+    let query = sqlDb("event").select().where('id','in',subquery);
+    return getPromiseForQuery(query,id);
 }
 
 
@@ -68,35 +50,9 @@ exports.getServiceEvents = function (id) {
  * returns List
  **/
 exports.getServicePeople = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [{
-            "id": 1,
-            "name": "Stefano",
-            "surname": "Maini",
-            "email": "stefano.maini@mail.com",
-            "telephone": "0123456789",
-            "description": "person description",
-            "leitmotiv": "It Won’t Fail Because of Me",
-            "skills": ["Python pro master", "Illustrator lover"],
-            "image_url": "image_url"
-        }, {
-            "id": 1,
-            "name": "Stefano",
-            "surname": "Maini",
-            "email": "stefano.maini@mail.com",
-            "telephone": "0123456789",
-            "description": "person description",
-            "leitmotiv": "It Won’t Fail Because of Me",
-            "skills": ["Python pro master", "Illustrator lover"],
-            "image_url": "image_url"
-        }];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let subquery = sqlDb("person_to_service").select("person_id").where({service_id: id})
+    let query = sqlDb("person").select().where('id','in',subquery);
+    return getPromiseForQuery(query,id);
 }
 
 
@@ -106,25 +62,25 @@ exports.getServicePeople = function (id) {
  * returns List
  **/
 exports.retrieveServices = function () {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [{
-            "id": 1,
-            "name": "service name",
-            "presentation": "service presentation",
-            "practical_info": "service practical_info",
-            "images_url": ["image_url_1", "image_url_2", "image_url_3"]
-        }, {
-            "id": 1,
-            "name": "service name",
-            "presentation": "service presentation",
-            "practical_info": "service practical_info",
-            "images_url": ["image_url_1", "image_url_2", "image_url_3"]
-        }];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
+    return sqlDb("service").select();
+
+}
+
+function getPromiseForQuery(query, id) {
+    return new Promise(async function (resolve, reject) {
+        if (Number.isInteger(id)){
+            let result = await query;
+            if (Object.keys(result).length > 0) {
+                resolve(result[Object.keys(result)[0]]);
+            } else {
+                const code = 404
+                const message = "No result for given id"
+                reject(new ErrorMessage(code,message))
+            }
         } else {
-            resolve();
+            const code = 400
+            const message = "Bad request"
+            reject(new ErrorMessage(code,message))
         }
     });
 }

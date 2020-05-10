@@ -1,4 +1,5 @@
 let {personDbSetup} = require("./PersonService");
+const {serviceDbSetup} = require("./ServiceService")
 
 const sqlDbFactory = require("knex");
 
@@ -12,6 +13,8 @@ let sqlDb = sqlDbFactory({
 function setupDataLayer() {
     console.log("Setting up Data Layer...");
     //TODO implementa una promise all che ritorna quando avremo tutti i setup
+    serviceDbSetup(sqlDb);
+
     return personDbSetup(sqlDb);
 }
 
