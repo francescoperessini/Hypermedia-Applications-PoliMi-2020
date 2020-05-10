@@ -1,5 +1,5 @@
 'use strict';
-const ErrorMessage = require("./ErrorMessage");
+const getPromiseForQuery = require('./Helper').getPromiseForQuery
 
 let sqlDb;
 
@@ -9,12 +9,13 @@ exports.serviceDbSetup = function (connection) {
     return sqlDb.schema.hasTable("service").then((exists) => {
         if (!exists) {
             console.log("Creating service table...");
-            //TODO create the Person table if it doesn't exist
+            //TODO create the service table if it doesn't exist
         } else {
-            console.log("Service table already into the database!")
+            console.log("service table already into the database!")
         }
     })
 }
+
 
 /**
  * Returns the service by its ID
@@ -22,12 +23,10 @@ exports.serviceDbSetup = function (connection) {
  * id Long Id of the service to be retrieved.
  * returns Service
  **/
-
 exports.getServiceById = function (id) {
     let query = sqlDb("service").select().where({id: id});
-    return getPromiseForQuery(query,id)
+    return getPromiseForQuery(query, id)
 }
-
 
 
 /**
@@ -37,9 +36,9 @@ exports.getServiceById = function (id) {
  * returns List
  **/
 exports.getServiceEvents = async function (id) {
-    let subquery = sqlDb("service_to_event").select("event_id").where({service_id: id})
-    let query = await sqlDb("event").select().where('id','in',subquery);
-    return getPromiseForQuery(query,id);
+    let subquery = sqlDb("service_to_event").select("event_id").where({service_id: id});
+    let query = await sqlDb("event").select().where('id', 'in', subquery);
+    return getPromiseForQuery(query, id)
 }
 
 
@@ -50,9 +49,9 @@ exports.getServiceEvents = async function (id) {
  * returns List
  **/
 exports.getServicePeople = function (id) {
-    let subquery = sqlDb("person_to_service").select("person_id").where({service_id: id})
-    let query = sqlDb("person").select().where('id','in',subquery);
-    return getPromiseForQuery(query,id);
+    let subquery = sqlDb("person_to_service").select("person_id").where({service_id: id});
+    let query = sqlDb("person").select().where('id', 'in', subquery);
+    return getPromiseForQuery(query, id)
 }
 
 
@@ -62,26 +61,6 @@ exports.getServicePeople = function (id) {
  * returns List
  **/
 exports.retrieveServices = function () {
-    return sqlDb("service").select();
-
-}
-
-function getPromiseForQuery(query, id) {
-    return new Promise(async function (resolve, reject) {
-        if (Number.isInteger(id)){
-            let result = await query;
-            if (Object.keys(result).length > 0) {
-                resolve(result);
-            } else {
-                const code = 404
-                const message = "No result for given id"
-                reject(new ErrorMessage(code,message))
-            }
-        } else {
-            const code = 400
-            const message = "Bad request"
-            reject(new ErrorMessage(code,message))
-        }
-    });
+    return sqlDb("service").select()
 }
 

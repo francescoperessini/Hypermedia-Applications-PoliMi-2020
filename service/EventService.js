@@ -1,4 +1,20 @@
 'use strict';
+const getPromiseForQuery = require('./Helper').getPromiseForQuery
+
+let sqlDb;
+
+exports.eventDbSetup = function (connection) {
+    sqlDb = connection;
+    console.log("Checking if the event table exists...");
+    return sqlDb.schema.hasTable("event").then((exists) => {
+        if (!exists) {
+            console.log("Creating event table...");
+            //TODO create the event table if it doesn't exist
+        } else {
+            console.log("event table already into the database!")
+        }
+    })
+}
 
 
 /**
@@ -8,23 +24,8 @@
  * returns Event
  **/
 exports.getEventById = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = {
-            "id": 1,
-            "name": "event name",
-            "date_time": "2017-07-21T17:32:28Z",
-            "presentation": "event presentation",
-            "practical_info": "event practical_info",
-            "skill_level": "skill level required",
-            "image_url": "image_url"
-        };
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let query = sqlDb("event").select().where({id: id});
+    return getPromiseForQuery(query, id)
 }
 
 
@@ -35,25 +36,9 @@ exports.getEventById = function (id) {
  * returns Person
  **/
 exports.getEventOrganizer = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = {
-            "id": 1,
-            "name": "Stefano",
-            "surname": "Maini",
-            "email": "stefano.maini@mail.com",
-            "telephone": "0123456789",
-            "description": "person description",
-            "leitmotiv": "It Won’t Fail Because of Me",
-            "skills": ["Python pro master", "Illustrator lover"],
-            "image_url": "image_url"
-        };
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let subquery = sqlDb("person_to_event").select("person_id").where({event_id: id});
+    let query = sqlDb("person").select().where('id', 'in', subquery);
+    return getPromiseForQuery(query, id)
 }
 
 
@@ -64,21 +49,9 @@ exports.getEventOrganizer = function (id) {
  * returns Service
  **/
 exports.getEventService = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = {
-            "id": 1,
-            "name": "service name",
-            "presentation": "service presentation",
-            "practical_info": "service practical_info",
-            "images_url": ["image_url_1", "image_url_2", "image_url_3"]
-        };
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let subquery = sqlDb("service_to_event").select("service_id").where({event_id: id});
+    let query = sqlDb("service").select().where('id', 'in', subquery);
+    return getPromiseForQuery(query, id)
 }
 
 
@@ -89,30 +62,50 @@ exports.getEventService = function (id) {
  * returns List
  **/
 exports.getEventsByMonth = function (month) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [{
-            "id": 1,
-            "name": "event name",
-            "date_time": "2017-07-21T17:32:28Z",
-            "presentation": "event presentation",
-            "practical_info": "event practical_info",
-            "skill_level": "skill level required",
-            "image_url": "image_url"
-        }, {
-            "id": 1,
-            "name": "event name",
-            "date_time": "2017-07-21T17:32:28Z",
-            "presentation": "event presentation",
-            "practical_info": "event practical_info",
-            "skill_level": "skill level required",
-            "image_url": "image_url"
-        }];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let m;
+    switch (month) {
+        case "jan":
+            m = 0
+            break;
+        case "feb":
+            m = 1
+            break;
+        case "mar":
+            m = 2
+            break;
+        case "apr":
+            m = 3
+            break;
+        case "may":
+            m = 4
+            break;
+        case "jun":
+            m = 5
+            break;
+        case "jul":
+            m = 6
+            break;
+        case "aug":
+            m = 7
+            break;
+        case "sep":
+            m = 8
+            break;
+        case "oct":
+            m = 9
+            break;
+        case "nov":
+            m = 10
+            break;
+        case "dec":
+            m = 11
+            break;
+    }
+    const current_year = new Date().getFullYear();
+    const days = new Date(current_year, m + 1, 0).getDate();
+    const from = current_year + "-" + (m + 1) + "-1T00:00:00Z";
+    const to = current_year + "-" + (m + 1) + "-" + days + "T23:59:59Z";
+
+   return sqlDb("event").select().whereBetween('event_date', [from, to]);
 }
 

@@ -1,4 +1,5 @@
 'use strict';
+const getPromiseForQuery = require('./Helper').getPromiseForQuery
 
 let sqlDb;
 
@@ -8,12 +9,13 @@ exports.personDbSetup = function (connection) {
     return sqlDb.schema.hasTable("person").then((exists) => {
         if (!exists) {
             console.log("Creating person table...");
-            //TODO create the Person table if it doesn't exist
+            //TODO create the person table if it doesn't exist
         } else {
             console.log("person table already into the database!")
         }
     })
 }
+
 
 /**
  * Returns the member of the association by his/her ID
@@ -21,11 +23,9 @@ exports.personDbSetup = function (connection) {
  * id Long Id of the person to be retrieved.
  * returns Person
  **/
-exports.getUserByID = async (id) => {
-    const user = await sqlDb("person").select("id", "name", "surname", "email", "telephone", "description", "leitmotiv",
-        "skills", "image_url").where("id", "=", id);
-    //TODO error handling
-
+exports.getUserByID = function (id) {
+    let query = sqlDb("person").select().where({id: id});
+    return getPromiseForQuery(query, id)
 }
 
 
@@ -36,31 +36,9 @@ exports.getUserByID = async (id) => {
  * returns List
  **/
 exports.getUserEvents = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [{
-            "id": 1,
-            "name": "event name",
-            "date_time": "2017-07-21T17:32:28Z",
-            "presentation": "event presentation",
-            "practical_info": "event practical_info",
-            "skill_level": "skill level required",
-            "image_url": "image_url"
-        }, {
-            "id": 1,
-            "name": "event name",
-            "date_time": "2017-07-21T17:32:28Z",
-            "presentation": "event presentation",
-            "practical_info": "event practical_info",
-            "skill_level": "skill level required",
-            "image_url": "image_url"
-        }];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let subquery = sqlDb("person_to_event").select("event_id").where({person_id: id});
+    let query = sqlDb("event").select().where('id', 'in', subquery);
+    return getPromiseForQuery(query, id)
 }
 
 
@@ -71,27 +49,9 @@ exports.getUserEvents = function (id) {
  * returns List
  **/
 exports.getUserServices = function (id) {
-    return new Promise(function (resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [{
-            "id": 1,
-            "name": "service name",
-            "presentation": "service presentation",
-            "practical_info": "service practical_info",
-            "images_url": ["image_url_1", "image_url_2", "image_url_3"]
-        }, {
-            "id": 1,
-            "name": "service name",
-            "presentation": "service presentation",
-            "practical_info": "service practical_info",
-            "images_url": ["image_url_1", "image_url_2", "image_url_3"]
-        }];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    let subquery = sqlDb("person_to_service").select("service_id").where({person_id: id});
+    let query = sqlDb("service").select().where('id', 'in', subquery);
+    return getPromiseForQuery(query, id)
 }
 
 
