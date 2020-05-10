@@ -6,7 +6,7 @@ getRow = function (person, i) {
             '            <div class="row badge-light ">\n' +
             '                <!--USER PHOTO-->\n' +
             '                <div class="col-md-3 text-center">\n' +
-            '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 ml-4" src="../assets/img/person_1.png">\n' +
+            '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 ml-4" src="../assets/img/person/person_1.png">\n' +
             '                </div>\n' +
             '                <!--USER DESCRIPTION-->\n' +
             '                <div class="col-md-9 align-self-center text-center">\n' +
@@ -29,7 +29,7 @@ getRow = function (person, i) {
             '                </div>\n' +
             '                <!--USER PHOTO-->\n' +
             '                <div class="col-md-3 text-center"">\n' +
-            '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 mr-4" src="../assets/img/person_2.png">\n' +
+            '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 mr-4" src="../assets/img/person/person_2.png">\n' +
             '                </div>\n' +
             '\n' +
             '            </div>\n' +
