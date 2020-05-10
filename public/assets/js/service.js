@@ -8,8 +8,6 @@ $.urlParam = function (name) {
 async function getService(id) {
     let service = await (await fetch('/v1/service/by_id/' + id)).json();
     service = service[0]
-    console.log(service)
-    console.log(service.name)
     $('#service_name').html(service.name)
     $('#service_presentation').html(service.presentation)
     document.getElementById("service_img").src = "../assets/img/services/" + service.image_urls[0]
@@ -26,7 +24,6 @@ getCardRelatedEvents = function(event){
 }
 
 getCardRelatedPeople = function(person){
-    console.log(person)
     return '<div class="card border-0">\n' +
 '                <img src="../assets/img/person/'+ person.image_url +'" class="card-img-top rounded-circle" alt="...">\n' +
 '                <div class="card-body text-center">\n' +
