@@ -36,9 +36,9 @@ exports.getServiceById = function (id) {
  * id Long Id of the service.
  * returns List
  **/
-exports.getServiceEvents = function (id) {
+exports.getServiceEvents = async function (id) {
     let subquery = sqlDb("service_to_event").select("event_id").where({service_id: id})
-    let query = sqlDb("event").select().where('id','in',subquery);
+    let query = await sqlDb("event").select().where('id','in',subquery);
     return getPromiseForQuery(query,id);
 }
 
@@ -71,7 +71,7 @@ function getPromiseForQuery(query, id) {
         if (Number.isInteger(id)){
             let result = await query;
             if (Object.keys(result).length > 0) {
-                resolve(result[Object.keys(result)[0]]);
+                resolve(result);
             } else {
                 const code = 404
                 const message = "No result for given id"
