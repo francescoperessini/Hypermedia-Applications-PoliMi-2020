@@ -35,9 +35,9 @@ exports.getUserByID = function (id) {
  * id Long Id of the person.
  * returns List
  **/
-exports.getUserEvents = function (id) {
+exports.getUserEvents = async function (id) {
     let subquery = sqlDb("person_to_event").select("event_id").where({person_id: id});
-    let query = sqlDb("event").select().where('id', 'in', subquery);
+    let query = await sqlDb("event").select().where('id', 'in', subquery);
     return getPromiseForQuery(query, id)
 }
 
