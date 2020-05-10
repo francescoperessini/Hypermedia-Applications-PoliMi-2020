@@ -30,3 +30,7 @@
     height: 15vw;
     object-fit: cover;
 }
+
+#service_img{
+    height: 250px;
+}
