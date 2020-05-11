@@ -17,7 +17,7 @@ tags:
   - name: "service"
     description: "Endpoints concerning the services of the association"
 schemes:
-  - "http"
+  - "https"
 paths:
   /events/by_month/{month}:
     get:
