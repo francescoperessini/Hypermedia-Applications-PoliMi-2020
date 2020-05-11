@@ -13,12 +13,7 @@ let sqlDb = sqlDbFactory({
 
 function setupDataLayer() {
     console.log("Setting up Data Layer...");
-
-    //TODO implement a Promise all when all the DbSetups will be available
-
-    eventDbSetup(sqlDb);
-    personDbSetup(sqlDb);
-    return serviceDbSetup(sqlDb);
+    return Promise.all([eventDbSetup(sqlDb), personDbSetup(sqlDb), serviceDbSetup(sqlDb)])
 }
 
 module.exports = {database: sqlDb, setupDataLayer};
