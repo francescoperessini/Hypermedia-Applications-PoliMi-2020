@@ -16,21 +16,23 @@ async function loadPerson(id) {
     let person = await (await fetch('/v1/person/by_id/' + id)).json();
     person = person[0]
     $('.name_surname').html(person.name + " " + person.surname)
-    $("#brief_description").html(person.description.substring(1, 50))
+    $("#brief_description").html(person.leitmotiv)
     $("#description").html(person.description)
     document.getElementById("person_img").src = "../assets/img/person/" + person.image_url
     $('#skills_list').append(skills_list_function(person.skills))
 }
 
 function getRow(content) {
-    return '<div class="card-group">\n' +
+    return '<div class="card-deck">\n' +
         content +
         '            </div>';
 
 }
 
 function getCard(content) {
-    let image_url = content["image_url"];
+    let image_url = '../assets/img/event/' + content["image_url"];
+    let image_urls = content["image_urls"];
+    if (image_urls) image_url = '../assets/img/service/' + image_urls[0];
     let name = content["name"];
     let presentation = content["presentation"];
 
@@ -42,9 +44,7 @@ function getCard(content) {
     '                            <h4 class="card-title">' + name + '</h4>\n' +
     '                            <p class="card-text">' + presentation +
     '                                </p>\n' +
-    '                            <div class="d-flex justify-content-center">\n' +
-    '                                <a class="btn btn-primary alert-dark">Button</a>\n' +
-    '                            </div>\n' +
+
     '\n' +
     '                        </div>\n' +
     '                    </div>\n';
