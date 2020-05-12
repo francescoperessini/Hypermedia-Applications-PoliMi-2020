@@ -39,12 +39,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
     app.use(serveStatic(path.join(__dirname, 'public')));
 
-    app.use(function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
-
     // Start the server
     setupDataLayer().then(() => {
         http.createServer(app).listen(serverPort, function () {

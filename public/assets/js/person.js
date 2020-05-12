@@ -23,7 +23,7 @@ async function loadPerson(id) {
 }
 
 function getRow(content) {
-    return '<div class="row mt-3">\n' +
+    return '<div class="card-group">\n' +
         content +
         '            </div>';
 
@@ -34,8 +34,7 @@ function getCard(content) {
     let name = content["name"];
     let presentation = content["presentation"];
 
-    return    '       <div class="col-md-4">\n' +
-    '                    <div class="card mb-3">\n' +
+    return '                    <div class="card ">\n' +
     '                        <img class="card-img-top "\n' +
     '                             src="' + image_url + '"\n' +
     '                             alt="Card image cap">\n' +
@@ -48,8 +47,7 @@ function getCard(content) {
     '                            </div>\n' +
     '\n' +
     '                        </div>\n' +
-    '                    </div>\n' +
-    '                </div>';
+    '                    </div>\n';
 }
 
 
