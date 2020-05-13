@@ -9,7 +9,13 @@ exports.serviceDbSetup = function (connection) {
     return sqlDb.schema.hasTable("service").then((exists) => {
         if (!exists) {
             console.log("Creating service table...");
-            //TODO create the service table if it doesn't exist
+            return sqlDb.schema.createTable("service", table => {
+                table.increments("id").primary();
+                table.string("name", 200);
+                table.string("presentation", 1000);
+                table.specificType("image_urls", "character varying[]");
+                table.string("practical_info", 1000);
+            });
         } else {
             console.log("service table already into the database!")
         }
