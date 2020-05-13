@@ -26,6 +26,7 @@ exports.personDbSetup = function (connection) {
     })
 }
 
+
 exports.personToServiceDbSetup = function (connection) {
     sqlDb = connection;
     console.log("Checking if the person_to_service table exists...");
@@ -41,25 +42,6 @@ exports.personToServiceDbSetup = function (connection) {
             });
         } else {
             console.log("person_to_service table already into the database!")
-        }
-    })
-}
-
-
-exports.serviceToEventDbSetup = function (connection) {
-    sqlDb = connection;
-    console.log("Checking if the service_to_event table exists...");
-    return sqlDb.schema.hasTable("service_to_event").then((exists) => {
-        if (!exists) {
-            console.log("Creating service_to_event table...");
-            return sqlDb.schema.createTable("service_to_event", table => {
-                table.integer("event_id").primary("service_to_event_pk");
-                table.integer("service_id");
-                table.foreign("event_id", "event_fk").references("id").inTable("event");
-                table.foreign("service_id", "service_fk").references("id").inTable("service");
-            });
-        } else {
-            console.log("service_to_event table already into the database!")
         }
     })
 }
