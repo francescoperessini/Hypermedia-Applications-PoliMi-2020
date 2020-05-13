@@ -1,9 +1,12 @@
 .jumbotron {
     padding-top: 15px;
     padding-bottom: 15px;
-    background: #d0d0d0;
+    background: #FFEDE1;
 
 }
+
+
+
 
 .page-footer {
     margin-top: 30px;
@@ -17,6 +20,41 @@
 .event-image {
     max-height: 400px;
     max-width: 400px;
+}
+
+footer a{
+    color: aliceblue ;
+    text-decoration: none;
+
+}
+
+footer a:hover{
+    color: #FFEDE1;
+    text-decoration: none;
+}
+footer p{
+    color: aliceblue;
+}
+body{
+    color: #333333;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h5 {
+    color: #333333;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color: aliceblue ;
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: #FFEDE1;
+}
+.h5-footer{
+    color: aliceblue;
 }
 
 .month-card {

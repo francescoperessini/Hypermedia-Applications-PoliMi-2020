@@ -15,107 +15,109 @@
 
 <body>
 <!-- NAVBAR -->
-<div id="navbar"></div>
-<!-- NAVBAR -->
+<div class="container-fluid">
+    <div id="navbar"></div>
+    <!-- NAVBAR -->
 
 
-<div class="row mt-5 mb-3">
-    <div class="col-md-1"></div>
-    <div class="col-md-3 mx-auto">
-        <div class="d-flex justify-content-center">
-            <img src="../assets/img/sample/49547737058_6b644f1fee_o.jpg" class="event-image"/>
+    <div class="row mt-5 mb-3">
+        <div class="col-md-1"></div>
+        <div class="col-md-3 mx-auto">
+            <div class="d-flex justify-content-center">
+                <img src="../assets/img/sample/49547737058_6b644f1fee_o.jpg" class="event-image"/>
+            </div>
+
+
         </div>
 
 
+        <div class="col-md-4 mx-auto">
+            <h3 id="event_name"></h3>
+            <p id="event_description">
+
+            </p>
+            <div class="row mt-1">
+                <div class="col-md-1 mr-auto">
+                    <svg class="bi bi-calendar" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M14 0H2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
+                              clip-rule="evenodd"/>
+                        <path fill-rule="evenodd"
+                              d="M6.5 7a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="col-md-2 mr-auto">
+                    <p id="date">
+
+                    </p>
+                </div>
+                <div class="col-md-1 ml-auto">
+                    <svg class="bi bi-clock-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M16 8A8 8 0 110 8a8 8 0 0116 0zM8 3.5a.5.5 0 00-1 0V9a.5.5 0 00.252.434l3.5 2a.5.5 0 00.496-.868L8 8.71V3.5z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="col-md-3 ml-auto">
+                    <p id="hour"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
-
-    <div class="col-md-4 mx-auto">
-        <h3 id="event_name"></h3>
-        <p id="event_description">
-
-        </p>
-        <div class="row mt-1">
-            <div class="col-md-1 mr-auto">
-                <svg class="bi bi-calendar" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M14 0H2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
-                          clip-rule="evenodd"/>
-                    <path fill-rule="evenodd"
-                          d="M6.5 7a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2z"
-                          clip-rule="evenodd"/>
-                </svg>
+    <div class="row mt-2 mb-2">
+        <div class="col-md-5 ml-auto">
+            <div class="d-flex justify-content-center">
+                <h4>Organized by</h4>
             </div>
-            <div class="col-md-2 mr-auto">
-                <p id="date">
+            <div class="card mb-2">
+                <img class="card-img-top "
+                     src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(37).jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Modelling</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                        of the
+                        card's content.</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary alert-dark">Button</a>
+                    </div>
 
-                </p>
-            </div>
-            <div class="col-md-1 ml-auto">
-                <svg class="bi bi-clock-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M16 8A8 8 0 110 8a8 8 0 0116 0zM8 3.5a.5.5 0 00-1 0V9a.5.5 0 00.252.434l3.5 2a.5.5 0 00.496-.868L8 8.71V3.5z"
-                          clip-rule="evenodd"/>
-                </svg>
-            </div>
-            <div class="col-md-3 ml-auto">
-                <p id="hour"></p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-1"></div>
-</div>
-
-<div class="row mt-2 mb-2">
-    <div class="col-md-5 ml-auto">
-        <div class="d-flex justify-content-center">
-            <h4>Organized by</h4>
-        </div>
-        <div class="card mb-2">
-            <img class="card-img-top "
-                 src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(37).jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <h4 class="card-title">Modelling</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                    of the
-                    card's content.</p>
-                <div class="d-flex justify-content-center">
-                    <a class="btn btn-primary alert-dark">Button</a>
                 </div>
 
             </div>
+        </div>
+        <div class="col-md-5 mr-auto">
+            <div class="d-flex justify-content-center">
+                <h4>Service</h4>
+            </div>
+            <div class="card mb-2">
+                <img class="card-img-top "
+                     src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(37).jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Modelling</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                        of the
+                        card's content.</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-primary alert-dark">Button</a>
+                    </div>
 
-        </div>
-    </div>
-    <div class="col-md-5 mr-auto">
-        <div class="d-flex justify-content-center">
-            <h4>Service</h4>
-        </div>
-        <div class="card mb-2">
-            <img class="card-img-top "
-                 src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(37).jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <h4 class="card-title">Modelling</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                    of the
-                    card's content.</p>
-                <div class="d-flex justify-content-center">
-                    <a class="btn btn-primary alert-dark">Button</a>
                 </div>
 
             </div>
-
         </div>
+
     </div>
 
+    <!-- Footer -->
+    <div id="footer"></div>
 </div>
-
-<!-- Footer -->
-<div id="footer"></div>
 <!-- Footer -->
 
 
