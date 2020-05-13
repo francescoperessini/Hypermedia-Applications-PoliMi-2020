@@ -10,7 +10,7 @@ exports.personDbSetup = function (connection) {
         if (!exists) {
             console.log("Creating person table...");
             return sqlDb.schema.createTable("person", table => {
-                table.increments("id").primary();
+                table.increments("id").primary("pk_person_id");
                 table.string("name", 100);
                 table.string("surname", 100);
                 table.string("description", 1000);
@@ -22,6 +22,63 @@ exports.personDbSetup = function (connection) {
             });
         } else {
             console.log("person table already into the database!")
+        }
+    })
+}
+
+exports.personToServiceDbSetup = function (connection) {
+    sqlDb = connection;
+    console.log("Checking if the person_to_service table exists...");
+    return sqlDb.schema.hasTable("person_to_service").then((exists) => {
+        if (!exists) {
+            console.log("Creating person_to_service table...");
+            return sqlDb.schema.createTable("person_to_service", table => {
+                table.integer("person_id");
+                table.integer("service_id");
+                table.primary(["person_id", "service_id"], "pk_person_to_service");
+                table.foreign("person_id", "person_fk").references("id").inTable("person");
+                table.foreign("service_id", "service_fk").references("id").inTable("service");
+            });
+        } else {
+            console.log("person_to_service table already into the database!")
+        }
+    })
+}
+
+
+exports.serviceToEventDbSetup = function (connection) {
+    sqlDb = connection;
+    console.log("Checking if the service_to_event table exists...");
+    return sqlDb.schema.hasTable("service_to_event").then((exists) => {
+        if (!exists) {
+            console.log("Creating service_to_event table...");
+            return sqlDb.schema.createTable("service_to_event", table => {
+                table.integer("event_id").primary("service_to_event_pk");
+                table.integer("service_id");
+                table.foreign("event_id", "event_fk").references("id").inTable("event");
+                table.foreign("service_id", "service_fk").references("id").inTable("service");
+            });
+        } else {
+            console.log("service_to_event table already into the database!")
+        }
+    })
+}
+
+
+exports.personToEventDbSetup = function (connection) {
+    sqlDb = connection;
+    console.log("Checking if the person_to_event table exists...");
+    return sqlDb.schema.hasTable("person_to_event").then((exists) => {
+        if (!exists) {
+            console.log("Creating person_to_event table...");
+            return sqlDb.schema.createTable("person_to_event", table => {
+                table.integer("event_id").primary("person_to_event_pk");
+                table.integer("person_id");
+                table.foreign("event_id", "event_fk").references("id").inTable("event");
+                table.foreign("person_id", "person_fk").references("id").inTable("person");
+            });
+        } else {
+            console.log("person_to_event table already into the database!")
         }
     })
 }

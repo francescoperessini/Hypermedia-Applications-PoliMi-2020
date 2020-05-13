@@ -10,9 +10,9 @@ exports.eventDbSetup = function (connection) {
         if (!exists) {
             console.log("Creating event table...");
             return sqlDb.schema.createTable("event", table => {
-                table.increments("id").primary();
+                table.increments("id").primary("pk_event_id");
                 table.string("name", 100);
-                //table.timestamp("event_date")
+                table.timestamp("event_date", {useTz: false});
                 table.string("practical_info", 1000);
                 table.string("image_url", 500);
                 table.string("presentation", 1000);

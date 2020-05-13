@@ -1,5 +1,5 @@
 const {eventDbSetup} = require("./EventService");
-const {personDbSetup} = require("./PersonService");
+const {personDbSetup, personToServiceDbSetup, serviceToEventDbSetup, personToEventDbSetup} = require("./PersonService");
 const {serviceDbSetup} = require("./ServiceService");
 
 const sqlDbFactory = require("knex");
@@ -13,7 +13,8 @@ let sqlDb = sqlDbFactory({
 
 function setupDataLayer() {
     console.log("Setting up Data Layer...");
-    return Promise.all([eventDbSetup(sqlDb), personDbSetup(sqlDb), serviceDbSetup(sqlDb)])
+    return Promise.all([serviceDbSetup(sqlDb), eventDbSetup(sqlDb), personDbSetup(sqlDb),
+        personToServiceDbSetup(sqlDb), serviceToEventDbSetup(sqlDb), personToEventDbSetup(sqlDb)])
 }
 
 module.exports = {database: sqlDb, setupDataLayer};

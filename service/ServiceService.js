@@ -10,7 +10,7 @@ exports.serviceDbSetup = function (connection) {
         if (!exists) {
             console.log("Creating service table...");
             return sqlDb.schema.createTable("service", table => {
-                table.increments("id").primary();
+                table.increments("id").primary("pk_service_id");
                 table.string("name", 200);
                 table.string("presentation", 1000);
                 table.specificType("image_urls", "character varying[]");
