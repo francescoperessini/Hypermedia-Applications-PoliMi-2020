@@ -74,7 +74,7 @@ getRow = function (rowContent) {
 }
 
 async function eventByMonth(month) {
-    const events = await (await fetch('/v1/event/by_month/' + month)).json();
+    const events = await (await fetch('/v1/events/by_month/' + month)).json();
 
     let html = "";
     let rowContent = "";
