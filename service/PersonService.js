@@ -9,7 +9,17 @@ exports.personDbSetup = function (connection) {
     return sqlDb.schema.hasTable("person").then((exists) => {
         if (!exists) {
             console.log("Creating person table...");
-            //TODO create the person table if it doesn't exist
+            return sqlDb.schema.createTable("person", table => {
+                table.increments("id").primary();
+                table.string("name", 100);
+                table.string("surname", 100);
+                table.string("description", 1000);
+                table.string("image_url", 500);
+                table.specificType("skills", "varchar(50) []");
+                table.string("email", 50);
+                table.string("telephone", 20);
+                table.string("leitmotiv", 200);
+            });
         } else {
             console.log("person table already into the database!")
         }

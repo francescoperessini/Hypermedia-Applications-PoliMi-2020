@@ -9,7 +9,15 @@ exports.eventDbSetup = function (connection) {
     return sqlDb.schema.hasTable("event").then((exists) => {
         if (!exists) {
             console.log("Creating event table...");
-            //TODO create the event table if it doesn't exist
+            return sqlDb.schema.createTable("event", table => {
+                table.increments("id").primary();
+                table.string("name", 100);
+                //table.timestamp("event_date")
+                table.string("practical_info", 1000);
+                table.string("image_url", 500);
+                table.string("presentation", 1000);
+                table.string("skill_level", 100);
+            });
         } else {
             console.log("event table already into the database!")
         }
@@ -106,6 +114,6 @@ exports.getEventsByMonth = function (month) {
     const from = current_year + "-" + (m + 1) + "-1T00:00:00Z";
     const to = current_year + "-" + (m + 1) + "-" + days + "T23:59:59Z";
 
-   return sqlDb("event").select().whereBetween('event_date', [from, to]);
+    return sqlDb("event").select().whereBetween('event_date', [from, to]);
 }
 
