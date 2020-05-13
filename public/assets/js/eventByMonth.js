@@ -23,7 +23,7 @@ getCard = function (event) {
     }
 
 
-    let html = "<div class=\"card bg-light border \">\n" +
+    return "<div class=\"card bg-light border \">\n" +
         "                <img class=\"events-card-img-top card-img-top\" src=\"" + image_url + "\" alt=\"Card image cap\">\n" +
         "                <div class=\"card-body\">\n" +
         "                    <h5 class=\"card-title\">" + name + "</h5>\n" +
@@ -39,12 +39,11 @@ getCard = function (event) {
         "                    <p class=\"card-text mt-3\">" + presentation + "</p>\n" +
         "                </div>\n" +
         "            </div>"
-    return html
 
 }
 getEmptyCard = function () {
 
-    let html = "<div class=\"card bg-light border \">\n" +
+    return "<div class=\"card bg-light border \">\n" +
         "                <div class=\"card-body\">\n" +
         "                    <h5 class=\"card-title\"></h5>\n" +
         "                    <div class=\"row\">\n" +
@@ -57,12 +56,11 @@ getEmptyCard = function () {
         "                    <p class=\"card-text mt-3\"></p>\n" +
         "                </div>\n" +
         "            </div>"
-    return html
 
 }
 getRow = function (rowContent) {
 
-    let html = '<div class="row mt-3">\n' +
+    return '<div class="row mt-3">\n' +
         '    <div class="col-md-1"></div>\n' +
         '    <div class="col-md-10">\n' +
         '        <div class="card-deck text-center">\n' +
@@ -71,12 +69,10 @@ getRow = function (rowContent) {
         '    </div>\n' +
         '    <div class="col-md-1"></div>\n' +
         '</div>'
-    return html
 
 
 }
 
-//retrieve the books written by the author and fill the template for each one
 async function eventByMonth(month) {
     const events = await (await fetch('/v1/event/by_month/' + month)).json();
 
@@ -108,7 +104,6 @@ async function eventByMonth(month) {
         i++
 
 
-
     })
     html += getRow(rowContent)
 
@@ -119,7 +114,6 @@ async function eventByMonth(month) {
 
 $(async function () {
     const month = $.urlParam("month");
-    eventByMonth(month)
+    await eventByMonth(month)
 });
-
 

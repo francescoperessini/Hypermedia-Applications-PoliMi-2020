@@ -10,10 +10,8 @@ async function getEvent(id) {
 }
 
 
-//retrieve the author id from URL and fill the page
 $(async function () {
     const event_id = $.urlParam("id");
-    getEvent(event_id)
+    await getEvent(event_id)
 });
-
 

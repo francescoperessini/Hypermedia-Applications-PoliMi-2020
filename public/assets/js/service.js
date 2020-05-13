@@ -13,30 +13,30 @@ async function getService(id) {
     document.getElementById("service_img").src = "../assets/img/services/" + service.image_urls[0]
 }
 
-getCardRelatedEvents = function(event){
+getCardRelatedEvents = function (event) {
     return '<div class="card border-0">\n' +
-        '                <img src="../assets/img/event/'+ event.image_url +'" class="card-img-top rounded-circle h-30" alt="image">\n' +
+        '                <img src="../assets/img/event/' + event.image_url + '" class="card-img-top rounded-circle h-30" alt="image">\n' +
         '                <div class="card-body text-center">\n' +
-        '                    <h5 class="card-title">'+ event.name+'</h5>\n' +
+        '                    <h5 class="card-title">' + event.name + '</h5>\n' +
         '                    <p class="card-text">' + event.practical_info.substr(0, 150) + '...</p>\n' +
         '                </div>\n' +
         '            </div>'
 }
 
-getCardRelatedPeople = function(person){
+getCardRelatedPeople = function (person) {
     return '<div class="card border-0">\n' +
-'                <img src="../assets/img/person/'+ person.image_url +'" class="card-img-top rounded-circle" alt="...">\n' +
-'                <div class="card-body text-center">\n' +
-'                    <h5 class="card-title">' + person.name+ ' ' + person.surname+'</h5>\n' +
-'                    <p class="card-text">' + person.description.substr(0, 100)+ '...</p>\n' +
-'                </div>\n' +
-'            </div>'
+        '                <img src="../assets/img/person/' + person.image_url + '" class="card-img-top rounded-circle" alt="...">\n' +
+        '                <div class="card-body text-center">\n' +
+        '                    <h5 class="card-title">' + person.name + ' ' + person.surname + '</h5>\n' +
+        '                    <p class="card-text">' + person.description.substr(0, 100) + '...</p>\n' +
+        '                </div>\n' +
+        '            </div>'
 }
 
 async function getInvolvedPeople(id) {
     const people = await (await fetch('/v1/service/by_id/' + id + '/people')).json();
     let html = "";
-    people.forEach((person) =>{
+    people.forEach((person) => {
         html += getCardRelatedPeople(person)
     })
     $('#involved-people').append(html)
@@ -45,19 +45,18 @@ async function getInvolvedPeople(id) {
 async function getEvents(id) {
     const events = await (await fetch('/v1/service/by_id/' + id + '/events')).json();
     let html = "";
-    events.forEach((event) =>{
+    events.forEach((event) => {
         html += getCardRelatedEvents(event)
     })
 
     $('#related-events').append(html);
 }
 
-//retrieve the author id from URL and fill the page
 $(async function () {
     const service_id = $.urlParam("service");
 
-    getService(service_id)
-    getEvents(service_id)
-    getInvolvedPeople(service_id)
+    await getService(service_id)
+    await getEvents(service_id)
+    await getInvolvedPeople(service_id)
 });
 

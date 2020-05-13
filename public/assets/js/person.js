@@ -37,19 +37,18 @@ function getCard(content) {
     let presentation = content["presentation"];
 
     return '                    <div class="card ">\n' +
-    '                        <img class="card-img-top "\n' +
-    '                             src="' + image_url + '"\n' +
-    '                             alt="Card image cap">\n' +
-    '                        <div class="card-body">\n' +
-    '                            <h4 class="card-title">' + name + '</h4>\n' +
-    '                            <p class="card-text">' + presentation +
-    '                                </p>\n' +
+        '                        <img class="card-img-top "\n' +
+        '                             src="' + image_url + '"\n' +
+        '                             alt="Card image cap">\n' +
+        '                        <div class="card-body">\n' +
+        '                            <h4 class="card-title">' + name + '</h4>\n' +
+        '                            <p class="card-text">' + presentation +
+        '                                </p>\n' +
 
-    '\n' +
-    '                        </div>\n' +
-    '                    </div>\n';
+        '\n' +
+        '                        </div>\n' +
+        '                    </div>\n';
 }
-
 
 
 async function loadEvents(id) {
@@ -85,7 +84,5 @@ $(async function () {
     await loadPerson(person_id);
     await loadEvents(person_id);
     await loadServices(person_id)
-
-
 });
 
