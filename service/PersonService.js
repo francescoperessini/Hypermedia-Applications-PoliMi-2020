@@ -74,7 +74,7 @@ exports.personToEventDbSetup = function (connection) {
  **/
 exports.getUserByID = function (id) {
     let query = sqlDb("person").select().where({id: id});
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "User not found.", false)
 }
 
 
@@ -87,7 +87,7 @@ exports.getUserByID = function (id) {
 exports.getUserEvents = async function (id) {
     let subquery = sqlDb("person_to_event").select("event_id").where({person_id: id});
     let query = await sqlDb("event").select().where('id', 'in', subquery);
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "User not found.")
 }
 
 
@@ -100,7 +100,7 @@ exports.getUserEvents = async function (id) {
 exports.getUserServices = function (id) {
     let subquery = sqlDb("person_to_service").select("service_id").where({person_id: id});
     let query = sqlDb("service").select().where('id', 'in', subquery);
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "User not found.")
 }
 
 
@@ -109,8 +109,7 @@ exports.getUserServices = function (id) {
  *
  * returns List
  **/
-exports.retrieveUsers = async () => {
-    return await sqlDb("person").select("id", "name", "surname", "email", "telephone", "description", "leitmotiv",
-        "skills", "image_url")
+exports.retrieveUsers = function () {
+    return sqlDb("person").select()
 }
 

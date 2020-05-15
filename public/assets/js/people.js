@@ -42,19 +42,27 @@ getRow = function (person, i) {
 }
 
 async function getPeople() {
-    const people = await (await fetch('/v1/people/')).json();
-    let html = ""
-    let i = 0
-    people.forEach((person) => {
-        html += getRow(person, i)
-        i++
-    })
-
-    $('#container').append(html)
+    let people;
+    try {
+        let response = await fetch('/v1/people/');
+        if (response.ok) {
+            people = await response.json();
+            let html = ""
+            let i = 0
+            people.forEach((person) => {
+                html += getRow(person, i)
+                i++
+            })
+            $('#container').append(html)
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 }
-
 
 $(async function () {
     await getPeople()
 });
-

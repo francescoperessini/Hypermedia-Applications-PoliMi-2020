@@ -12,16 +12,6 @@ skills_list_function = function (skills) {
     return html
 }
 
-async function loadPerson(id) {
-    let person = await (await fetch('/v1/person/by_id/' + id)).json();
-    person = person[0]
-    $('.name_surname').html(person.name + " " + person.surname)
-    $("#brief_description").html(person.leitmotiv)
-    $("#description").html(person.description)
-    document.getElementById("person_img").src = "../assets/img/person/" + person.image_url
-    $('#skills_list').append(skills_list_function(person.skills))
-}
-
 function getRow(content) {
     return '<div class="card-deck">\n' +
         content +
@@ -50,34 +40,72 @@ function getCard(content) {
         '                    </div>\n';
 }
 
+async function loadPerson(id) {
+    let person;
+    try {
+        let response = await fetch('/v1/person/by_id/' + id);
+        if (response.ok) {
+            person = await response.json();
+            $('.name_surname').html(person.name + " " + person.surname)
+            $("#brief_description").html(person.leitmotiv)
+            $("#description").html(person.description)
+            document.getElementById("person_img").src = "../assets/img/person/" + person.image_url
+            $('#skills_list').append(skills_list_function(person.skills))
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
+}
 
 async function loadEvents(id) {
-    let events = await (await fetch('/v1/person/by_id/' + id + '/events')).json();
-
-    let html = '';
-    events.forEach(
-        (event) => {
-            html += getCard(event);
+    let events;
+    try {
+        let response = await fetch('/v1/person/by_id/' + id + '/events');
+        if (response.ok) {
+            events = await response.json();
+            let html = '';
+            events.forEach(
+                (event) => {
+                    html += getCard(event);
+                }
+            )
+            html = getRow(html);
+            $('#events').append(html);
+        } else {
+            window.location.replace("../index.html");
         }
-    )
-    html = getRow(html);
-    $('#events').append(html);
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 }
 
 async function loadServices(id) {
-    let services = await (await fetch('/v1/person/by_id/' + id + '/services')).json();
-    console.log(services)
-    let html = '';
-    services.forEach(
-        (event) => {
-            html += getCard(event);
+    let services;
+    try {
+        let response = await fetch('/v1/person/by_id/' + id + '/services');
+        if (response.ok) {
+            services = await response.json();
+            console.log(services)
+            let html = '';
+            services.forEach(
+                (event) => {
+                    html += getCard(event);
+                }
+            )
+            html = getRow(html);
+            $('#services').append(html);
+        } else {
+            window.location.replace("../index.html");
         }
-    )
-    html = getRow(html);
-    $('#services').append(html);
-
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 }
-
 
 $(async function () {
     const person_id = $.urlParam("id");
@@ -85,4 +113,3 @@ $(async function () {
     await loadEvents(person_id);
     await loadServices(person_id)
 });
-
