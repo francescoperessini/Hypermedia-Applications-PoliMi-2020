@@ -23,44 +23,33 @@
 
     <div class="row mt-4">
         <div class="col-md-2">
-            <div class="row">
-                <div class="col text-center">
-                    <i class='fas fa-align-justify'></i>
-                </div>
-                <div class="col-9 text-left">View all events</div>
-            </div>
-
+            <a class="btn btn-secondary" href="events.html" >
+                <i class='fas fa-align-justify'></i> View all months
+            </a>
         </div>
         <div class="col-md-6"></div>
         <div class="col-md-4">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col">
-                            <i class='fas fa-arrow-left'></i>
-                        </div>
-                        <div class="col-9">View Previous Month</div>
-                    </div>
+                    <button class="btn btn-secondary" id="prev">
+                                <i class='fas fa-arrow-left'></i> View Previous Month
+                    </button>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-9">View Next Month</div>
-                        <div class="col-md">
-                            <i class='fas fa-arrow-right'></i>
-                        </div>
-                    </div>
+                    <button class="btn btn-secondary" id="next">
+                        View Next Month <i class='fas fa-arrow-right'></i>
+                    </button>
+
                 </div>
             </div>
         </div>
 
     </div>
 
-    <div class="row text-center mt-3">
-        <div class="col-md-12 "><h3>April's events</h3></div>
+    <div class="row text-center ">
+        <div class="col-md-12 mt-3"><h3 id="month"></h3></div>
     </div>
     <div id="events"></div>
-
-
 
 
 </div>

@@ -30,19 +30,19 @@ function getRow(content) {
 }
 
 function getCard(content) {
-    let image_url = '../assets/img/event/' + content["image_url"];
+    let image_url = '' + content["image_url"];
     let image_urls = content["image_urls"];
     if (image_urls) image_url = '../assets/img/service/' + image_urls[0];
     let name = content["name"];
     let presentation = content["presentation"];
 
-    return '                    <div class="card ">\n' +
-        '                        <img class="card-img-top "\n' +
+    return '                    <div class="card h-100">\n' +
+        '                        <img class="card-img-top img-fluid"\n' +
         '                             src="' + image_url + '"\n' +
         '                             alt="Card image cap">\n' +
         '                        <div class="card-body">\n' +
         '                            <h4 class="card-title">' + name + '</h4>\n' +
-        '                            <p class="card-text">' + presentation +
+        '                            <p class="card-text">' + truncate(presentation,100) +
         '                                </p>\n' +
 
         '\n' +
@@ -50,10 +50,15 @@ function getCard(content) {
         '                    </div>\n';
 }
 
+function truncate(string, end){
+    if(string.length > end){
+        return string.substring(0,end) + '...';
+    }
+    return string
+}
 
 async function loadEvents(id) {
     let events = await (await fetch('/v1/person/by_id/' + id + '/events')).json();
-
     let html = '';
     events.forEach(
         (event) => {
@@ -66,7 +71,6 @@ async function loadEvents(id) {
 
 async function loadServices(id) {
     let services = await (await fetch('/v1/person/by_id/' + id + '/services')).json();
-    console.log(services)
     let html = '';
     services.forEach(
         (event) => {
@@ -78,11 +82,32 @@ async function loadServices(id) {
 
 }
 
+async function loadServicesAndEvents(id) {
+    let events = await (await fetch('/v1/person/by_id/' + id + '/events')).json();
+    let services = await (await fetch('/v1/person/by_id/' + id + '/services')).json();
+    let html = '';
+
+    services.forEach(
+        (event) => {
+            html += getCard(event);
+        }
+    )
+    html += '<div class="separator"></div>'
+    events.forEach(
+        (event) => {
+            html += getCard(event);
+        }
+    )
+    html = getRow(html);
+    $('#services_and_events').append(html);
+
+}
+
 
 $(async function () {
     const person_id = $.urlParam("id");
     await loadPerson(person_id);
     await loadEvents(person_id);
-    await loadServices(person_id)
+    await loadServices(person_id);
 });
 

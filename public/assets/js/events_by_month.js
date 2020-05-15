@@ -4,6 +4,22 @@ $.urlParam = function (name) {
     return results[1] || "jan";
 };
 
+
+monthDict = {
+    jan: "January",
+    feb: "February",
+    mar: "March",
+    apr: "April",
+    may: "May",
+    jun: "June",
+    jul: "July",
+    aug: "August",
+    sep: "September",
+    oct: "October",
+    nov: "November",
+    dec: "December"
+}
+
 getCard = function (event) {
 
     let name = ""
@@ -23,52 +39,40 @@ getCard = function (event) {
     }
 
 
-    return "<div class=\"card bg-light border \">\n" +
-        "                <img class=\"events-card-img-top card-img-top\" src=\"" + image_url + "\" alt=\"Card image cap\">\n" +
+    return " <div class=\"col-md-6 col-lg-4 col-xl-3 py-2\"><div class=\" card h-100\">\n" +
+        "                <img class=\"events-card-img-top card-img-top\" src=" + image_url + ">\n" +
         "                <div class=\"card-body\">\n" +
         "                    <h5 class=\"card-title\">" + name + "</h5>\n" +
-        "                    <div class=\"row\">\n" +
-        "                        <div class=\"col-md-4 text-right\">\n" +
-        "                            <i class='fas fa-calendar-alt'></i>\n" +
+        "                        <div class=\"p-1 text-left\">\n" +
+        "                            \n" +
         "                        </div>\n" +
-        "                        <div class=\"col-md-8 text-left\">\n" +
-        "                            " + event_date + "\n" +
+        "                        <div class=\"p-1 text-left\">\n" +
+        "                            <i class='fas fa-calendar-alt'></i>  " + event_date + "\n" +
         "                        </div>\n" +
-        "                    </div>\n" +
-        "\n" +
-        "                    <p class=\"card-text mt-3\">" + presentation + "</p>\n" +
+        "                    <p class=\"card-text mt-3\">" + truncate(practical_info, 100) + "</p>" +
+        "                   <a class='btn btn-secondary' href='/pages/event.html?id=" + id + "'>Learn More</a>" +
         "                </div>\n" +
-        "            </div>"
+        "            </div></div>"
 
 }
-getEmptyCard = function () {
 
-    return "<div class=\"card bg-light border \">\n" +
-        "                <div class=\"card-body\">\n" +
-        "                    <h5 class=\"card-title\"></h5>\n" +
-        "                    <div class=\"row\">\n" +
-        "                        <div class=\"col-md-4 text-right\">\n" +
-        "                        </div>\n" +
-        "                        <div class=\"col-md-8 text-left\">\n" +
-        "                        </div>\n" +
-        "                    </div>\n" +
-        "\n" +
-        "                    <p class=\"card-text mt-3\"></p>\n" +
-        "                </div>\n" +
+function truncate(string, end) {
+    if (string.length > end) {
+        return string.substring(0, end) + '...';
+    }
+    return string
+}
+
+getEmptyCard = function () {
+    return "<div class=\"card \">\n" +
         "            </div>"
 
 }
 getRow = function (rowContent) {
 
-    return '<div class="row mt-3">\n' +
-        '    <div class="col-md-1"></div>\n' +
-        '    <div class="col-md-10">\n' +
-        '        <div class="card-deck text-center">\n' +
+    return '<div class="container"><div class="row my-4">\n' +
         rowContent +
-        '        </div>\n' +
-        '    </div>\n' +
-        '    <div class="col-md-1"></div>\n' +
-        '</div>'
+        '</div></div>'
 
 
 }
@@ -83,27 +87,7 @@ async function eventByMonth(month) {
     let i = 0;
     const num_events = events.length;
     events.forEach((event) => {
-
-        if (i % 4 === 0) {
-            html += i === 0 ? '' : getRow(rowContent)
-            rowContent = ''
-            rowContent += getCard(event)
-
-        } else {
-            rowContent += getCard(event)
-        }
-
-        if (i === num_events - 1) {
-            let emptySpace = 3 - (i % 4)
-            if (emptySpace !== 4) {
-                for (const _ of Array(emptySpace).keys()) {
-                    rowContent += getEmptyCard()
-                }
-            }
-        }
-        i++
-
-
+        rowContent += getCard(event)
     })
     html += getRow(rowContent)
 
@@ -111,9 +95,45 @@ async function eventByMonth(month) {
     $('#events').append(html);
 }
 
+async function loadMonth(month) {
+    $('#month').append(monthDict[month]);
+
+}
+
+function redirect(currentMonth, increment) {
+    let keys = Object.keys(monthDict);
+    let monthNumber = keys.indexOf(currentMonth)
+    monthNumber = monthNumber + (increment * 1);
+    monthNumber = monthNumber < 0 ? 11 : monthNumber;
+    monthNumber = monthNumber % 12
+    console.log(monthNumber)
+    window.location.href = ('events_by_month.html?month=' + keys[monthNumber])
+
+
+}
 
 $(async function () {
     const month = $.urlParam("month");
-    await eventByMonth(month)
+    await loadMonth(month);
+    await eventByMonth(month);
+    $(document).ready(function () {
+        $("#next").click(function () {
+            redirect(month, +1)
+        });
+        $("#prev").click(function () {
+            redirect(month, -1)
+        });
+    });
 });
+
+function clickHandler(event) {
+    console.log("ciao")
+
+}
+
+
+
+
+
+
 
