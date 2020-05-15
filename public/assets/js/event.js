@@ -1,20 +1,29 @@
-//retrieve the parameter "name" in the URL
 $.urlParam = function (id) {
     const results = new RegExp('[\?&]' + id + '=([^&#]*)').exec(window.location.href);
     return results[1] || 0;
 };
 
-
 async function getEvent(id) {
-    const events = await (await fetch('/v1/event/by_id/' + id)).json();
-    let event = events[0]
-    let [date, time] = event["event_date"].split("T");
-    time = time.split('.')[0]
-    $('#date').append(date)
-    $('#hour').append(time)
-    $('#event_name').append(event["name"])
-    $('#event_description').append(event["presentation"])
-    $('#image').attr("src",event["image_url"])
+    let event;
+    try {
+        let response = await fetch('/v1/event/by_id/' + id);
+        if (response.ok) {
+            event = await response.json();
+            let event = event[0]
+            let [date, time] = event["event_date"].split("T");
+            time = time.split('.')[0]
+            $('#date').append(date)
+            $('#hour').append(time)
+            $('#event_name').append(event["name"])
+            $('#event_description').append(event["presentation"])
+            $('#image').attr("src",event["image_url"])
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 
 }
 
@@ -47,9 +56,9 @@ function truncate(string, end) {
 }
 
 async function loadPersonService(id){
-    let organizer = await (await fetch('/v1/event/by_id/' + id + '/organizer')).json();
+    let organizer = getEventOrganizer(id);
     organizer = organizer[0];
-    let service = await (await fetch('/v1/event/by_id/' + id + '/service')).json();
+    let service = getEventService(id)
     service = service[0];
 
     let row = '<div class="container"><div class="row my-4">\n' +
@@ -62,10 +71,40 @@ async function loadPersonService(id){
 }
 
 
+async function getEventOrganizer(id) {
+    let person;
+    try {
+        let response = await fetch('/v1/event/by_id/' + id + '/organizer');
+        if (response.ok) {
+            person = await response.json();
+            return person
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
+}
+
+async function getEventService(id) {
+    let service;
+    try {
+        let response = await fetch('/v1/event/by_id/' + id + '/service');
+        if (response.ok) {
+            service = await response.json();
+            return service
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
+}
 
 $(async function () {
     const event_id = $.urlParam("id");
     await getEvent(event_id)
     await loadPersonService(event_id)
 });
-

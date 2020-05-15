@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "OpenAPI specification for the RESTful API of the backend of the Hypermedia\
     \ application course project a.y. 2019/2020.\n"
-  version: "2.0.0"
+  version: "2.1.0"
   title: "Swagger FreeLab"
   contact:
     email: "freelab@swagger.it"
@@ -55,8 +55,6 @@ paths:
               $ref: "#/definitions/Event"
         "400":
           description: "Bad request."
-        "404":
-          description: "Events not found."
       x-swagger-router-controller: "Event"
   /event/by_id/{id}:
     get:
@@ -82,6 +80,8 @@ paths:
           description: "Bad request."
         "404":
           description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Event"
   /event/by_id/{id}/organizer:
     get:
@@ -107,6 +107,8 @@ paths:
           description: "Bad request."
         "404":
           description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Event"
   /event/by_id/{id}/service:
     get:
@@ -132,6 +134,8 @@ paths:
           description: "Bad request."
         "404":
           description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Event"
   /people:
     get:
@@ -176,6 +180,8 @@ paths:
           description: "Bad request."
         "404":
           description: "User not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Person"
   /person/by_id/{id}/events:
     get:
@@ -203,6 +209,8 @@ paths:
           description: "Bad request."
         "404":
           description: "User not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Person"
   /person/by_id/{id}/services:
     get:
@@ -230,6 +238,8 @@ paths:
           description: "Bad request."
         "404":
           description: "User not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Person"
   /services:
     get:
@@ -274,6 +284,8 @@ paths:
           description: "Bad request."
         "404":
           description: "Service not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Service"
   /service/by_id/{id}/events:
     get:
@@ -301,6 +313,8 @@ paths:
           description: "Bad request."
         "404":
           description: "Service not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Service"
   /service/by_id/{id}/people:
     get:
@@ -328,6 +342,8 @@ paths:
           description: "Bad request."
         "404":
           description: "Service not found."
+          schema:
+            $ref: "#/definitions/Error"
       x-swagger-router-controller: "Service"
 definitions:
   Event:
@@ -419,3 +435,14 @@ definitions:
         - "image_url_1"
         - "image_url_2"
         - "image_url_3"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+    example:
+      code: 404
+      message: "error"

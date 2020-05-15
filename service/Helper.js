@@ -1,20 +1,22 @@
+const {respondWithCode} = require("../utils/writer");
+
 const ErrorMessage = require("./ErrorMessage");
 
-module.exports.getPromiseForQuery = function (query, id) {
+module.exports.getPromiseForQuery = function (query, id, message, array = true) {
     return new Promise(async function (resolve, reject) {
         if (Number.isInteger(id)) {
             let result = await query;
             if (Object.keys(result).length > 0) {
-                resolve(result);
+                if (array) {
+                    resolve(result)
+                } else {
+                    resolve(result[Object.keys(result)[0]])
+                }
             } else {
-                const code = 404
-                const message = "No result for given id"
-                reject(new ErrorMessage(code, message))
+                reject(respondWithCode(404, new ErrorMessage(404, message)))
             }
         } else {
-            const code = 400
-            const message = "Bad request"
-            reject(new ErrorMessage(code, message))
+            reject(respondWithCode(400, new ErrorMessage(400, message)))
         }
     });
 }

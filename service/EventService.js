@@ -33,7 +33,7 @@ exports.eventDbSetup = function (connection) {
  **/
 exports.getEventById = function (id) {
     let query = sqlDb("event").select().where({id: id});
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "Event not found.", false)
 }
 
 
@@ -46,7 +46,7 @@ exports.getEventById = function (id) {
 exports.getEventOrganizer = function (id) {
     let subquery = sqlDb("person_to_event").select("person_id").where({event_id: id});
     let query = sqlDb("person").select().where('id', 'in', subquery);
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "Event not found.", false)
 }
 
 
@@ -59,7 +59,7 @@ exports.getEventOrganizer = function (id) {
 exports.getEventService = function (id) {
     let subquery = sqlDb("service_to_event").select("service_id").where({event_id: id});
     let query = sqlDb("service").select().where('id', 'in', subquery);
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "Event not found.", false)
 }
 
 

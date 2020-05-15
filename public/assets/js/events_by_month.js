@@ -1,4 +1,3 @@
-//retrieve the parameter "name" in the URL
 $.urlParam = function (name) {
     const results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     return results[1] || "jan";
@@ -77,22 +76,28 @@ getRow = function (rowContent) {
 
 }
 
-async function eventByMonth(month) {
-    const events = await (await fetch('/v1/events/by_month/' + month)).json();
+async function getEventsByMonth(month) {
+    let events;
+    try {
+        let response = await fetch('/v1/events/by_month/' + month);
+        if (response.ok) {
+            events = await response.json();
+            let html = "";
+            let rowContent = "";
+            events.forEach((event) => {
+                rowContent += getCard(event)
+            })
+            html += getRow(rowContent)
 
-    let html = "";
-    let rowContent = "";
 
-
-    let i = 0;
-    const num_events = events.length;
-    events.forEach((event) => {
-        rowContent += getCard(event)
-    })
-    html += getRow(rowContent)
-
-
-    $('#events').append(html);
+            $('#events').append(html);
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 }
 
 async function loadMonth(month) {
@@ -114,6 +119,7 @@ function redirect(currentMonth, increment) {
 
 $(async function () {
     const month = $.urlParam("month");
+    await getEventsByMonth(month)
     await loadMonth(month);
     await eventByMonth(month);
     $(document).ready(function () {
@@ -125,15 +131,4 @@ $(async function () {
         });
     });
 });
-
-function clickHandler(event) {
-    console.log("ciao")
-
-}
-
-
-
-
-
-
 

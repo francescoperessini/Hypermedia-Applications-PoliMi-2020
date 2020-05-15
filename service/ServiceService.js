@@ -50,7 +50,7 @@ exports.serviceToEventDbSetup = function (connection) {
  **/
 exports.getServiceById = function (id) {
     let query = sqlDb("service").select().where({id: id});
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "Service not found.", false)
 }
 
 
@@ -62,8 +62,8 @@ exports.getServiceById = function (id) {
  **/
 exports.getServiceEvents = async function (id) {
     let subquery = sqlDb("service_to_event").select("event_id").where({service_id: id});
-    let query = await sqlDb("event").select().where('id', 'in', subquery);
-    return getPromiseForQuery(query, id)
+    let query = sqlDb("event").select().where('id', 'in', subquery);
+    return getPromiseForQuery(query, id, "Service not found.")
 }
 
 
@@ -76,7 +76,7 @@ exports.getServiceEvents = async function (id) {
 exports.getServicePeople = function (id) {
     let subquery = sqlDb("person_to_service").select("person_id").where({service_id: id});
     let query = sqlDb("person").select().where('id', 'in', subquery);
-    return getPromiseForQuery(query, id)
+    return getPromiseForQuery(query, id, "Service not found.")
 }
 
 
