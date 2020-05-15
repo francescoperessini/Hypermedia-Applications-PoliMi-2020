@@ -1,4 +1,3 @@
-//retrieve the parameter "name" in the URL
 $.urlParam = function (name) {
     const results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     return results[1] || 0;

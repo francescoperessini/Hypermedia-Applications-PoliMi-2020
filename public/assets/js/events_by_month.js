@@ -1,4 +1,3 @@
-//retrieve the parameter "name" in the URL
 $.urlParam = function (name) {
     const results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     return results[1] || "jan";
@@ -73,47 +72,50 @@ getRow = function (rowContent) {
 
 }
 
-async function eventByMonth(month) {
-    const events = await (await fetch('/v1/events/by_month/' + month)).json();
+async function getEventsByMonth(month) {
+    let events;
+    try {
+        let response = await fetch('/v1/events/by_month/' + month);
+        if (response.ok) {
+            events = await response.json();
+            let html = "";
+            let rowContent = "";
 
-    let html = "";
-    let rowContent = "";
+            let i = 0;
+            const num_events = events.length;
+            events.forEach((event) => {
 
+                if (i % 4 === 0) {
+                    html += i === 0 ? '' : getRow(rowContent)
+                    rowContent = ''
+                    rowContent += getCard(event)
 
-    let i = 0;
-    const num_events = events.length;
-    events.forEach((event) => {
-
-        if (i % 4 === 0) {
-            html += i === 0 ? '' : getRow(rowContent)
-            rowContent = ''
-            rowContent += getCard(event)
-
-        } else {
-            rowContent += getCard(event)
-        }
-
-        if (i === num_events - 1) {
-            let emptySpace = 3 - (i % 4)
-            if (emptySpace !== 4) {
-                for (const _ of Array(emptySpace).keys()) {
-                    rowContent += getEmptyCard()
+                } else {
+                    rowContent += getCard(event)
                 }
-            }
+
+                if (i === num_events - 1) {
+                    let emptySpace = 3 - (i % 4)
+                    if (emptySpace !== 4) {
+                        for (const _ of Array(emptySpace).keys()) {
+                            rowContent += getEmptyCard()
+                        }
+                    }
+                }
+                i++
+            })
+            html += getRow(rowContent);
+            $('#events').append(html);
+        } else {
+            window.location.replace("../index.html");
         }
-        i++
-
-
-    })
-    html += getRow(rowContent)
-
-
-    $('#events').append(html);
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 }
-
 
 $(async function () {
     const month = $.urlParam("month");
-    await eventByMonth(month)
+    await getEventsByMonth(month)
 });
-
