@@ -4,15 +4,6 @@ $.urlParam = function (name) {
     return results[1] || 0;
 };
 
-
-async function getService(id) {
-    let service = await (await fetch('/v1/service/by_id/' + id)).json();
-    service = service[0]
-    $('#service_name').html(service.name)
-    $('#service_presentation').html(service.presentation)
-    document.getElementById("service_img").src = "../assets/img/services/" + service.image_urls[0]
-}
-
 getCardRelatedEvents = function (event) {
     return '<div class="card border-0">\n' +
         '                <img src="../assets/img/event/' + event.image_url + '" class="card-img-top rounded-circle h-30" alt="image">\n' +
@@ -33,30 +24,68 @@ getCardRelatedPeople = function (person) {
         '            </div>'
 }
 
-async function getInvolvedPeople(id) {
-    const people = await (await fetch('/v1/service/by_id/' + id + '/people')).json();
-    let html = "";
-    people.forEach((person) => {
-        html += getCardRelatedPeople(person)
-    })
-    $('#involved-people').append(html)
+async function getService(id) {
+    let service;
+    try {
+        let response = await fetch('/v1/service/by_id/' + id);
+        if (response.ok) {
+            service = await response.json();
+            $('#service_name').html(service.name)
+            $('#service_presentation').html(service.presentation)
+            //TODO carousel of images
+            document.getElementById("service_img").src = "../assets/img/services/" + service.image_urls[0]
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 }
 
 async function getEvents(id) {
-    const events = await (await fetch('/v1/service/by_id/' + id + '/events')).json();
-    let html = "";
-    events.forEach((event) => {
-        html += getCardRelatedEvents(event)
-    })
+    let events;
+    try {
+        let response = await fetch('/v1/service/by_id/' + id + '/events');
+        if (response.ok) {
+            events = await response.json();
+            let html = "";
+            events.forEach((event) => {
+                html += getCardRelatedEvents(event)
+            })
+            $('#related-events').append(html);
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
+}
 
-    $('#related-events').append(html);
+async function getInvolvedPeople(id) {
+    let people;
+    try {
+        let response = await fetch('/v1/service/by_id/' + id + '/people');
+        if (response.ok) {
+            people = await response.json();
+            let html = "";
+            people.forEach((person) => {
+                html += getCardRelatedPeople(person)
+            })
+            $('#involved-people').append(html)
+        } else {
+            window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 }
 
 $(async function () {
     const service_id = $.urlParam("service");
-
     await getService(service_id)
     await getEvents(service_id)
     await getInvolvedPeople(service_id)
 });
-
