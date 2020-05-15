@@ -32,7 +32,7 @@ async function getService(id) {
             $('#service_name').html(service.name)
             $('#service_presentation').html(service.presentation)
             //TODO carousel of images
-            document.getElementById("service_img").src = "../assets/img/services/" + service.image_urls[0]
+            document.getElementById("service_img").src = "../assets/img/service/" + service.image_urls[0]
         } else {
             window.location.replace("../index.html");
         }
@@ -83,7 +83,7 @@ async function getInvolvedPeople(id) {
 }
 
 $(async function () {
-    const service_id = $.urlParam("service");
+    const service_id = $.urlParam("id");
     await getService(service_id)
     await getEvents(service_id)
     await getInvolvedPeople(service_id)

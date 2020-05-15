@@ -9,14 +9,13 @@ async function getEvent(id) {
         let response = await fetch('/v1/event/by_id/' + id);
         if (response.ok) {
             event = await response.json();
-            let event = event[0]
             let [date, time] = event["event_date"].split("T");
             time = time.split('.')[0]
             $('#date').append(date)
             $('#hour').append(time)
             $('#event_name').append(event["name"])
             $('#event_description').append(event["presentation"])
-            $('#image').attr("src",event["image_url"])
+            $('#image').attr("src", event["image_url"])
         } else {
             window.location.replace("../index.html");
         }
@@ -27,12 +26,13 @@ async function getEvent(id) {
 
 }
 
-function getCard(content) {
+function getCard(content, type) {
     let image_url = '' + content["image_url"];
     let image_urls = content["image_urls"];
     if (image_urls) image_url = '../assets/img/service/' + image_urls[0];
     let name = content["name"];
     let presentation = content["presentation"] || content["description"];
+    let id = content['id'];
 
     return '    <div class="col-md-8 col-lg-6 col-xl-6 py-2 mx-auto"><div class="card h-100">\n' +
         '                        <img class="card-img-top  img-fluid"\n' +
@@ -40,10 +40,10 @@ function getCard(content) {
         '                             alt="Card image cap">\n' +
         '                        <div class="card-body">\n' +
         '                            <h4 class="card-title">' + name + '</h4>\n' +
-        '                            <p class="card-text">' + truncate(presentation ,100) +
+        '                            <p class="card-text">' + truncate(presentation, 100) +
         '                                </p>\n' +
 
-        '\n' +
+        '<a class=\'btn btn-secondary\' href=\'/pages/' + type + '.html?id=' + id + '\'>Learn More</a>' +
         '                        </div>\n' +
         '                    </div></div>\n';
 }
@@ -55,14 +55,12 @@ function truncate(string, end) {
     return string
 }
 
-async function loadPersonService(id){
-    let organizer = getEventOrganizer(id);
-    organizer = organizer[0];
-    let service = getEventService(id)
-    service = service[0];
+async function loadPersonService(id) {
+    let organizer = await getEventOrganizer(id);
+    let service = await getEventService(id);
 
     let row = '<div class="container"><div class="row my-4">\n' +
-        getCard(organizer) + getCard(service) +
+        getCard(organizer,'person') + getCard(service,'service') +
         '</div></div>'
 
     $('#person_service').append(row);

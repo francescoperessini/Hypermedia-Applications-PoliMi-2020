@@ -80,7 +80,7 @@ async function loadEvents(id) {
             html = getRow(html);
             $('#events').append(html);
         } else {
-            window.location.replace("../index.html");
+            //window.location.replace("../index.html");
         }
     } catch (e) {
         //Network error
@@ -104,7 +104,7 @@ async function loadServices(id) {
             html = getRow(html);
             $('#services').append(html);
         } else {
-            window.location.replace("../index.html");
+            //window.location.replace("../index.html");
         }
     } catch (e) {
         //Network error

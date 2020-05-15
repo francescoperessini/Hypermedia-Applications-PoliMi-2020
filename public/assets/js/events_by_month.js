@@ -76,7 +76,7 @@ getRow = function (rowContent) {
 
 }
 
-async function getEventsByMonth(month) {
+async function loadEventsByMonth(month) {
     let events;
     try {
         let response = await fetch('/v1/events/by_month/' + month);
@@ -119,9 +119,8 @@ function redirect(currentMonth, increment) {
 
 $(async function () {
     const month = $.urlParam("month");
-    await getEventsByMonth(month)
+    await loadEventsByMonth(month)
     await loadMonth(month);
-    await eventByMonth(month);
     $(document).ready(function () {
         $("#next").click(function () {
             redirect(month, +1)
