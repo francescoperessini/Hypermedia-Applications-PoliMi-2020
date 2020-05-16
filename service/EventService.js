@@ -114,6 +114,7 @@ exports.getEventsByMonth = function (month) {
     const from = current_year + "-" + (m + 1) + "-1T00:00:00Z";
     const to = current_year + "-" + (m + 1) + "-" + days + "T23:59:59Z";
 
-    return sqlDb("event").select().whereBetween('event_date', [from, to]);
+    return sqlDb("event").select().whereBetween('event_date', [from, to])
+        .orderBy("event_date", "asc");
 }
 
