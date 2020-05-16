@@ -15,47 +15,49 @@
 </head>
 
 <body>
-<div id="navbar"></div>
-<div class="container-fluid">
-    <!-- NAVBAR -->
+<div class="wrapper">
+    <div id="navbar"></div>
+    <div class="container-fluid content">
+        <!-- NAVBAR -->
 
-    <!-- NAVBAR -->
+        <!-- NAVBAR -->
 
-    <div class="row mt-4">
-        <div class="col-md-2">
-            <a class="btn btn-secondary" href="events.html" >
-                <i class='fas fa-align-justify'></i> View all months
-            </a>
-        </div>
-        <div class="col-md-6"></div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <button class="btn btn-secondary" id="prev">
-                                <i class='fas fa-arrow-left'></i> View Previous Month
-                    </button>
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-secondary" id="next">
-                        View Next Month <i class='fas fa-arrow-right'></i>
-                    </button>
+        <div class="row mt-4">
+            <div class="col-md-2">
+                <a class="btn btn-secondary" href="events.html" >
+                    <i class='fas fa-align-justify'></i> View all months
+                </a>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary" id="prev">
+                                    <i class='fas fa-arrow-left'></i> View Previous Month
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary" id="next">
+                            View Next Month <i class='fas fa-arrow-right'></i>
+                        </button>
 
+                    </div>
                 </div>
             </div>
+
         </div>
 
+        <div class="row text-center ">
+            <div class="col-md-12 mt-3"><h3 id="month"></h3></div>
+        </div>
+        <div id="events"></div>
+
+
     </div>
-
-    <div class="row text-center ">
-        <div class="col-md-12 mt-3"><h3 id="month"></h3></div>
-    </div>
-    <div id="events"></div>
-
-
+    <!-- Footer -->
+    <div id="footer"></div>
+<!-- Wrapper -->
 </div>
-<div id="footer"></div>
-<!-- Footer -->
-
 
 <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
