@@ -19,7 +19,7 @@ monthDict = {
     dec: "December"
 }
 
-getCard = function (event) {
+getCard = function (event, month) {
 
     let name = ""
     let event_date = ""
@@ -49,7 +49,7 @@ getCard = function (event) {
         "                            <i class='fas fa-calendar-alt'></i>  " + event_date + "\n" +
         "                        </div>\n" +
         "                    <p class=\"card-text mt-3\">" + truncate(practical_info, 100) + "</p>" +
-        "                   <a class='btn btn-secondary' href='/pages/event.html?id=" + id + "'>Learn More</a>" +
+        "                   <a class='btn btn-secondary' href='/pages/event.html?id=" + id + "&month=" + month + "'>Learn More</a>" +
         "                </div>\n" +
         "            </div></div>"
 
@@ -85,7 +85,7 @@ async function loadEventsByMonth(month) {
             let html = "";
             let rowContent = "";
             events.forEach((event) => {
-                rowContent += getCard(event)
+                rowContent += getCard(event,month)
             })
             html += getRow(rowContent)
 
@@ -115,7 +115,7 @@ function redirect(currentMonth, increment) {
 
 }
 
-function getAdjacentMonth(currentMonth, increment = +1){
+function getAdjacentMonth(currentMonth, increment = +1) {
     let keys = Object.keys(monthDict);
     let monthNumber = keys.indexOf(currentMonth)
     monthNumber = monthNumber + (increment);
@@ -123,12 +123,12 @@ function getAdjacentMonth(currentMonth, increment = +1){
     return monthNumber % 12
 }
 
-function getPreviousMonth(currentMonth){
-    return getAdjacentMonth(currentMonth,-1);
+function getPreviousMonth(currentMonth) {
+    return getAdjacentMonth(currentMonth, -1);
 }
 
-function getNextMonth(currentMonth){
-    return getAdjacentMonth(currentMonth,+1);
+function getNextMonth(currentMonth) {
+    return getAdjacentMonth(currentMonth, +1);
 }
 
 $(async function () {

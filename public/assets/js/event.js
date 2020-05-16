@@ -3,6 +3,9 @@ $.urlParam = function (id) {
     return results[1] || 0;
 };
 
+
+let eventList = []
+
 async function getEvent(id) {
     let event;
     try {
@@ -60,7 +63,7 @@ async function loadPersonService(id) {
     let service = await getEventService(id);
 
     let row = '<div class="container"><div class="row my-4">\n' +
-        getCard(organizer,'person') + getCard(service,'service') +
+        getCard(organizer, 'person') + getCard(service, 'service') +
         '</div></div>'
 
     $('#person_service').append(row);
@@ -77,12 +80,13 @@ async function getEventOrganizer(id) {
             person = await response.json();
             return person
         } else {
-            window.location.replace("../index.html");
+            //window.location.replace("../index.html");
         }
     } catch (e) {
         //Network error
         console.log(e);
     }
+    return undefined
 }
 
 async function getEventService(id) {
@@ -93,31 +97,74 @@ async function getEventService(id) {
             service = await response.json();
             return service
         } else {
-            window.location.replace("../index.html");
+            //window.location.replace("../index.html");
         }
     } catch (e) {
         //Network error
         console.log(e);
     }
+    return undefined
 }
 
-function redirect(currentMonth, increment) {
+function redirect(id, increment, month) {
+    let indexOfEvent = 0;
+    eventList.forEach((event) => {
+        if (event["id"] == id) {
+            indexOfEvent = eventList.indexOf(event);
+        }
+    })
+    indexOfEvent = indexOfEvent + (increment);
+    indexOfEvent = indexOfEvent < 0 ? eventList.length-1 : indexOfEvent;
+    indexOfEvent = indexOfEvent % eventList.length
 
-    window.location.href = ('events_by_month.html?month=' + keys[monthNumber])
+    console.log('event.html?id=' + eventList[indexOfEvent] + '&month=' + month)
 
+    window.location.href = ('event.html?id=' + eventList[indexOfEvent]["id"] + '&month=' + month);
+
+
+}
+
+async function loadMonthEvents(month) {
+    let events;
+    try {
+        let response = await fetch('/v1/events/by_month/' + month);
+        if (response.ok) {
+            events = await response.json();
+            events.forEach((event) => {
+                eventList.push(event)
+            })
+
+        } else {
+            //window.location.replace("../index.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
 
 }
 
 $(async function () {
     const event_id = $.urlParam("id");
-    await getEvent(event_id)
-    await loadPersonService(event_id)
-    $(document).ready(function () {
-        $("#next").click(function () {
-            redirect(month, +1)
+    const month = $.urlParam("month");
+
+    try {
+        await getEvent(event_id)
+        await loadMonthEvents(month)
+        await loadPersonService(event_id)
+
+    } catch (e) {
+        console.log(e)
+    } finally {
+        $(document).ready(function () {
+            $("#next").click(function () {
+                redirect(event_id, +1, month)
+            });
+            $("#prev").click(function () {
+                redirect(event_id, -1, month)
+            });
         });
-        $("#prev").click(function () {
-            redirect(month, -1)
-        });
-    });
+    }
+
+
 });

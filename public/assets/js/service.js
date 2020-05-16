@@ -15,7 +15,7 @@ getCardRelatedEvents = function (event) {
 
 getCardRelatedPeople = function (person) {
     return '<div class="card border-0">\n' +
-        '                <img src="../assets/img/person/' + person.image_url + '" class="card-img-top rounded-circle" alt="...">\n' +
+        '                <img src="' + person.image_url + '" class="card-img-top rounded-circle" alt="...">\n' +
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + person.name + ' ' + person.surname + '</h5>\n' +
         '                    <p class="card-text">' + person.description.substr(0, 100) + '...</p>\n' +
@@ -32,7 +32,7 @@ async function getService(id) {
             $('#service_name').html(service.name)
             $('#service_presentation').html(service.presentation)
             //TODO carousel of images
-            document.getElementById("service_img").src = "../assets/img/service/" + service.image_urls[0]
+            $("#service_img").attr("src", service.image_urls[0]);
         } else {
             window.location.replace("../index.html");
         }

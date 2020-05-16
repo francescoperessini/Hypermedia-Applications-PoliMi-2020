@@ -21,7 +21,7 @@ function getRow(content) {
 function getCard(content) {
     let image_url = '' + content["image_url"];
     let image_urls = content["image_urls"];
-    if (image_urls) image_url = '../assets/img/service/' + image_urls[0];
+    if (image_urls) image_url = image_urls[0];
     let name = content["name"];
     let presentation = content["presentation"];
 
@@ -54,7 +54,7 @@ async function loadPerson(id) {
             $('.name_surname').html(person.name + " " + person.surname)
             $("#brief_description").html(person.leitmotiv)
             $("#description").html(person.description)
-            document.getElementById("person_img").src = "../assets/img/person/" + person.image_url
+            document.getElementById("person_img").src = person.image_url
             $('#skills_list').append(skills_list_function(person.skills))
         } else {
             window.location.replace("../index.html");
