@@ -103,24 +103,41 @@ async function loadEventsByMonth(month) {
 async function loadMonth(month) {
     $('#month').append(monthDict[month]);
 
+
 }
 
 function redirect(currentMonth, increment) {
     let keys = Object.keys(monthDict);
-    let monthNumber = keys.indexOf(currentMonth)
-    monthNumber = monthNumber + (increment * 1);
-    monthNumber = monthNumber < 0 ? 11 : monthNumber;
-    monthNumber = monthNumber % 12
+    let monthNumber = getAdjacentMonth(currentMonth, increment)
     console.log(monthNumber)
     window.location.href = ('events_by_month.html?month=' + keys[monthNumber])
 
 
 }
 
+function getAdjacentMonth(currentMonth, increment = +1){
+    let keys = Object.keys(monthDict);
+    let monthNumber = keys.indexOf(currentMonth)
+    monthNumber = monthNumber + (increment);
+    monthNumber = monthNumber < 0 ? 11 : monthNumber;
+    return monthNumber % 12
+}
+
+function getPreviousMonth(currentMonth){
+    return getAdjacentMonth(currentMonth,-1);
+}
+
+function getNextMonth(currentMonth){
+    return getAdjacentMonth(currentMonth,+1);
+}
+
 $(async function () {
     const month = $.urlParam("month");
     await loadEventsByMonth(month)
     await loadMonth(month);
+    $("#next").prepend(monthDict[Object.keys(monthDict)[getNextMonth(month)]]);
+    $("#prev").append(monthDict[Object.keys(monthDict)[getPreviousMonth(month)]])
+
     $(document).ready(function () {
         $("#next").click(function () {
             redirect(month, +1)

@@ -5,7 +5,7 @@ getRow = function (person) {
         '            <div class="row badge-light ">\n' +
         '                <!--USER PHOTO-->\n' +
         '                <div class="col-md-3 text-center">\n' +
-        '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 mr-4" src="../assets/img/person/' + person.image_url + '">\n' +
+        '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 mr-4" src="' + person.image_url + '">\n' +
         '                </div>\n' +
         '                <!--USER DESCRIPTION-->\n' +
         '                <div class="col-md-9 align-self-center text-center">\n' +

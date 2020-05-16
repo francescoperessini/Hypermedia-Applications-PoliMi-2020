@@ -27,9 +27,9 @@ async function getEvent(id) {
 }
 
 function getCard(content, type) {
-    let image_url = '' + content["image_url"];
+    let image_url = content["image_url"];
     let image_urls = content["image_urls"];
-    if (image_urls) image_url = '../assets/img/service/' + image_urls[0];
+    if (image_urls) image_url = image_urls[0];
     let name = content["name"];
     let presentation = content["presentation"] || content["description"];
     let id = content['id'];
@@ -101,8 +101,23 @@ async function getEventService(id) {
     }
 }
 
+function redirect(currentMonth, increment) {
+
+    window.location.href = ('events_by_month.html?month=' + keys[monthNumber])
+
+
+}
+
 $(async function () {
     const event_id = $.urlParam("id");
     await getEvent(event_id)
     await loadPersonService(event_id)
+    $(document).ready(function () {
+        $("#next").click(function () {
+            redirect(month, +1)
+        });
+        $("#prev").click(function () {
+            redirect(month, -1)
+        });
+    });
 });
