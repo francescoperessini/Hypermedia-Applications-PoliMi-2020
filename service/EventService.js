@@ -118,3 +118,18 @@ exports.getEventsByMonth = function (month) {
         .orderBy("event_date", "asc");
 }
 
+
+/**
+ * Returns the events related with the specified event (same month events)
+ *
+ * id Long Id of the event.
+ * returns List
+ **/
+exports.getRelatedEvents = function (id) {
+    let subquery = sqlDb("event").select(sqlDb.raw('EXTRACT(MONTH FROM ??)', 'event_date')).where({id: id});
+    let query = sqlDb("event")
+        .select()
+        .where(sqlDb.raw('EXTRACT(MONTH FROM ??)', 'event_date'), '=', subquery)
+        .orderBy("event_date", "asc");
+    return getPromiseForQuery(query, id, "Event not found.")
+}

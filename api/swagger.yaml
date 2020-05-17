@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "OpenAPI specification for the RESTful API of the backend of the Hypermedia\
     \ application course project a.y. 2019/2020.\n"
-  version: "2.1.0"
+  version: "2.2.0"
   title: "Swagger FreeLab"
   contact:
     email: "freelab@swagger.it"
@@ -76,6 +76,35 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Event"
+  /event/by_id/{id}/related_events:
+    get:
+      tags:
+        - "event"
+      summary: "Returns the events related with the specified event (same month events)"
+      operationId: "getRelatedEvents"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the event."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
         "400":
           description: "Bad request."
         "404":
