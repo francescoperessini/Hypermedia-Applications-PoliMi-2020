@@ -86,6 +86,6 @@ exports.getServicePeople = function (id) {
  * returns List
  **/
 exports.retrieveServices = function () {
-    return sqlDb("service").select()
+    return sqlDb("service").select().orderBy("id", "asc")
 }
 
