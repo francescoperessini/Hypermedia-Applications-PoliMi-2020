@@ -31,7 +31,7 @@ function getCard(content) {
         '                             alt="Card image cap">\n' +
         '                        <div class="card-body">\n' +
         '                            <h4 class="card-title">' + name + '</h4>\n' +
-        '                            <p class="card-text">' + truncate(presentation,100) +
+        '                            <p class="card-text">' + truncate(presentation, 100) +
         '                                </p>\n' +
 
         '\n' +
@@ -39,12 +39,13 @@ function getCard(content) {
         '                    </div>\n';
 }
 
-function truncate(string, end){
-    if(string.length > end){
-        return string.substring(0,end) + '...';
+function truncate(string, end) {
+    if (string.length > end) {
+        return string.substring(0, end) + '...';
     }
     return string
 }
+
 async function loadPerson(id) {
     let person;
     try {
@@ -54,6 +55,8 @@ async function loadPerson(id) {
             $('.name_surname').html(person.name + " " + person.surname)
             $("#brief_description").html(person.leitmotiv)
             $("#description").html(person.description)
+            $("#phone_number").append(" " + person.telephone)
+            $("#email").append(" " + person.email)
             document.getElementById("person_img").src = person.image_url
             $('#skills_list').append(skills_list_function(person.skills))
         } else {
@@ -111,8 +114,6 @@ async function loadServices(id) {
         console.log(e);
     }
 }
-
-
 
 
 $(async function () {

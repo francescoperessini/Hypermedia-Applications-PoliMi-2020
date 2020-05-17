@@ -110,6 +110,6 @@ exports.getUserServices = function (id) {
  * returns List
  **/
 exports.retrieveUsers = function () {
-    return sqlDb("person").select()
+    return sqlDb("person").select().orderBy("id", "asc")
 }
 
