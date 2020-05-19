@@ -5,7 +5,7 @@ $.urlParam = function (name) {
 
 getCardRelatedEvents = function (event) {
     return '<div class="card border-0">\n' +
-        '                <img src="' + event.image_url + '" class="card-img-top rounded-circle h-30" alt="image">\n' +
+        '                <img src="' + event.image_url + '" class="card-img-top rounded-circle h-30" alt="' + event.name + ' photo">\n' +
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + event.name + '</h5>\n' +
         '                    <p class="card-text">' + event.practical_info.substr(0, 150) + '...</p>\n' +
@@ -15,7 +15,7 @@ getCardRelatedEvents = function (event) {
 
 getCardRelatedPeople = function (person) {
     return '<div class="card border-0">\n' +
-        '                <img src="' + person.image_url + '" class="card-img-top rounded-circle" alt="...">\n' +
+        '                <img src="' + person.image_url + '" class="card-img-top rounded-circle" alt="' + person.name +' '+ person.surname + ' profile photo">\n' +
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + person.name + ' ' + person.surname + '</h5>\n' +
         '                    <p class="card-text">' + person.description.substr(0, 100) + '...</p>\n' +
@@ -32,7 +32,7 @@ async function getService(id) {
             $('#service_name').html(service.name)
             $('#service_presentation').html(service.presentation)
             //TODO carousel of images
-            $("#service_img").attr("src", service.image_urls[0]);
+            $("#service_img").attr("src", service.image_urls[0]).attr("alt", service.name + " photo");
         } else {
             window.location.replace("../index.html");
         }

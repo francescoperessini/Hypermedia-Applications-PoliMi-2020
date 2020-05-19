@@ -57,7 +57,9 @@ async function loadPerson(id) {
             $("#description").html(person.description)
             $("#phone_number").append(" " + person.telephone)
             $("#email").append(" " + person.email)
-            document.getElementById("person_img").src = person.image_url
+            //document.getElementById("person_img").src = person.image_url
+            $("#person_img").attr("src", person.image_url).attr("alt", person.name + person.surname +"'s profile photo")
+            //$("#person_img")
             $('#skills_list').append(skills_list_function(person.skills))
         } else {
             window.location.replace("../index.html");
