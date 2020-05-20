@@ -36,8 +36,14 @@ function getCard(content, type) {
     let name = content["name"];
     let presentation = content["presentation"] || content["description"];
     let id = content['id'];
-
-    return '    <div class="col-md-8 col-lg-6 col-xl-6 py-2 mx-auto"><div class="card h-100">\n' +
+    let title
+    if(type === 'person'){
+        title = '<h1 class="text-center">Organized by</h1>'
+    }else if (type === 'service'){
+        title = '<h1 class="text-center">Related service</h1>'
+    }
+    return '    <div class="col-md-8 col-lg-6 col-xl-6 py-2">' + title +
+        '<div class="card custom-mobile-card mx-auto">\n' +
         '                        <img class="card-img-top  img-fluid"\n' +
         '                             src="' + image_url + '"\n' +
         '                             alt="Card image cap">\n' +
