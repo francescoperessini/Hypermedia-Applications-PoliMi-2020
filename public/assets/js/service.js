@@ -9,6 +9,7 @@ getCardRelatedEvents = function (event) {
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + event.name + '</h5>\n' +
         '                    <p class="card-text">' + event.practical_info.substr(0, 150) + '...</p>\n' +
+        '<a href="/pages/event.html?id=' + person.id + '"><button type="button" class="btn btn-secondary">View More</button></a>' +
         '                </div>\n' +
         '            </div>'
 }
@@ -19,6 +20,7 @@ getCardRelatedPeople = function (person) {
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + person.name + ' ' + person.surname + '</h5>\n' +
         '                    <p class="card-text">' + person.description.substr(0, 100) + '...</p>\n' +
+        '<a href="/pages/person.html?id=' + person.id + '"><button type="button" class="btn btn-secondary">View More</button></a>' +
         '                </div>\n' +
         '            </div>'
 }
