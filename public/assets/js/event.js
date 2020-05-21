@@ -19,6 +19,7 @@ async function getEvent(id) {
             $('#event_name').append(event["name"])
             $('#event_description').append(event["presentation"])
             $('#image').attr("src", event["image_url"])
+            $('#image').attr("alt", event["name"] + '_image')
         } else {
             window.location.replace("../index.html");
         }
@@ -46,7 +47,7 @@ function getCard(content, type) {
         '<div class="card custom-mobile-card mx-auto">\n' +
         '                        <img class="card-img-top  img-fluid"\n' +
         '                             src="' + image_url + '"\n' +
-        '                             alt="Card image cap">\n' +
+        '                             alt="' + name + '">\n' +
         '                        <div class="card-body">\n' +
         '                            <h4 class="card-title">' + name + '</h4>\n' +
         '                            <p class="card-text">' + truncate(presentation, 100) +
@@ -120,20 +121,20 @@ function redirect(id, increment, month) {
         }
     })
     indexOfEvent = indexOfEvent + (increment);
-    indexOfEvent = indexOfEvent < 0 ? eventList.length-1 : indexOfEvent;
+    indexOfEvent = indexOfEvent < 0 ? eventList.length - 1 : indexOfEvent;
     indexOfEvent = indexOfEvent % eventList.length
 
-    console.log('event.html?id=' + eventList[indexOfEvent] + '&month=' + month)
+    console.log('event.html?id=' + eventList[indexOfEvent] )
 
-    window.location.href = ('event.html?id=' + eventList[indexOfEvent]["id"] + '&month=' + month);
+    window.location.href = ('event.html?id=' + eventList[indexOfEvent]["id"] );
 
 
 }
 
-async function loadMonthEvents(month) {
+async function loadMonthEvents(id) {
     let events;
     try {
-        let response = await fetch('/v1/events/by_month/' + month);
+        let response = await fetch('/v1/event/by_id/'+ id +'/related_events');
         if (response.ok) {
             events = await response.json();
             events.forEach((event) => {
@@ -152,11 +153,10 @@ async function loadMonthEvents(month) {
 
 $(async function () {
     const event_id = $.urlParam("id");
-    const month = $.urlParam("month");
 
     try {
         await getEvent(event_id)
-        await loadMonthEvents(month)
+        await loadMonthEvents(event_id)
         await loadPersonService(event_id)
 
     } catch (e) {
@@ -164,10 +164,10 @@ $(async function () {
     } finally {
         $(document).ready(function () {
             $("#next").click(function () {
-                redirect(event_id, +1, month)
+                redirect(event_id, +1)
             });
             $("#prev").click(function () {
-                redirect(event_id, -1, month)
+                redirect(event_id, -1)
             });
         });
     }
