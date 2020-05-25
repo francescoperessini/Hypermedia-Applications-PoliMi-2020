@@ -37,12 +37,38 @@ It is ensured that the HTML is rendered client side (in the Presentation layer) 
 #### REST compliance
 Describe here to what extent did you follow REST principles and what are the reasons for which you might have decided to diverge. Note, you must not describe the whole API here, just the design decisions.
 #### OpenAPI Resource models
-Describe here synthetically, which models you have introduced for resources.
+- Event: represents a generic event offered by the Association; it contains the ID of the event, its name, date and time, a short presentation, some practical info, the skill 
+level required and the url of the associated image;
+- Person: represents a member of the Association; it contains the ID of the person, and some personal information like his/her name, surname, email, telephone, 
+leitmotiv, skills, a short description and the url of the associated image;
+- Service: represents a generic service offered by the Association; it contains the ID of the service, its name, 
+a short presentation, some practical info, and an array of urls for the associated images;
+- Error: represents the generic structure for the errors returned by the server; it contains the response code 
+(for example 400/404), and a short message to explain what went wrong with the request. 
 ### Data model
 Describe with an ER diagram the model used in the data layer of your web application. How these map to the OpenAPI data model?
 ## Implementation
 ### Tools used
-Describe here which tools, languages and frameworks did you use for the backend of the application.
+####Environment
+- Node.js: an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a web browser.
+####Tools
+- WebStorm: a powerful and intelligent IDE that gives you the best coding assistance for JavaScript, 
+HTML and CSS and a wide range of modern web technologies. WebStorm is perfectly equipped for complex client-side 
+development and server-side development with Node.js;
+- Database Tools and SQL (WebStorm plugin): a database plugin for IntelliJ-based IDEs providing support for all the 
+features available in the standalone IDE for databases, DataGrip. It enables handling information stored in relational 
+databases along with SQL language support;
+- Swagger Editor: open source editor fully dedicated to OpenAPI-based APIs.The Swagger Editor is an easy way to 
+get started with the OpenAPI Specification (formerly known as Swagger), with support for Swagger 2.0 and OpenAPI 3.0.
+####Languages
+- JavaScript.
+####Frameworks and Libraries
+- Knex.js: Knex.js is a "batteries included" SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, 
+and Amazon Redshift designed to be flexible, portable, and fun to use. It features both traditional 
+node style callbacks as well as a promise interface for cleaner async flow control, a stream interface, 
+full featured query and schema builders, transaction support (with savepoints), connection pooling and standardized 
+responses between different query clients and dialects;
+- serve-static: a Node.js library used to serve static content over HTTP.
 
 ### Discussion
 Describe here:
