@@ -23,6 +23,12 @@
 
 ## Specification
 ### Web Architecture
+![Three tier architecture](multi-tier.png)
+
+
+
+
+
 Describe here, with a diagram, the components of your web application and how they interact. Highlight which parts belong to the application layer, data layer or presentation layer. How did you ensure that HTML is not rendered server side?
 ### API
 #### REST compliance
