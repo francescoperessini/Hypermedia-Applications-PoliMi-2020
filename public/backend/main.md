@@ -23,6 +23,7 @@
 ## Specification
 ### Web Architecture
 ![Three tier architecture](multi-tier.png)
+
 The web architecture implemented is a three tier one: Presentation, Application and Data layers represent the three different 
 actors which interact between them as shown in the picture above.
 
