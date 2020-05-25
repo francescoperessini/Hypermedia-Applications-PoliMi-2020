@@ -1,0 +1,477 @@
+---
+swagger: "2.0"
+info:
+  description: "OpenAPI specification for the RESTful API of the backend of the Hypermedia\
+    \ application course project a.y. 2019/2020.\n"
+  version: "2.2.0"
+  title: "Swagger FreeLab"
+  contact:
+    email: "freelab@swagger.it"
+host: "martina-peressini-peresson.herokuapp.com"
+basePath: "/v1"
+tags:
+  - name: "event"
+    description: "Endpoints concerning the events of the association"
+  - name: "person"
+    description: "Endpoints concerning the members of the association"
+  - name: "service"
+    description: "Endpoints concerning the services of the association"
+schemes:
+  - "https"
+paths:
+  /events/by_month/{month}:
+    get:
+      tags:
+        - "event"
+      summary: "Returns all the events for the specified month"
+      operationId: "getEventsByMonth"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "month"
+          in: "path"
+          description: "Month for which events need to be retrieved."
+          required: true
+          type: "string"
+          enum:
+            - "jan"
+            - "feb"
+            - "mar"
+            - "apr"
+            - "may"
+            - "jun"
+            - "jul"
+            - "aug"
+            - "sep"
+            - "oct"
+            - "nov"
+            - "dec"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request."
+      x-swagger-router-controller: "Event"
+  /event/by_id/{id}:
+    get:
+      tags:
+        - "event"
+      summary: "Returns the event by its ID"
+      operationId: "getEventById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the event to be retrieved."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Event"
+  /event/by_id/{id}/related_events:
+    get:
+      tags:
+        - "event"
+      summary: "Returns the events related with the specified event (same month events)"
+      operationId: "getRelatedEvents"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the event."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Event"
+  /event/by_id/{id}/organizer:
+    get:
+      tags:
+        - "event"
+      summary: "Returns the organizer of the specified event"
+      operationId: "getEventOrganizer"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the event."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Person"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Event"
+  /event/by_id/{id}/service:
+    get:
+      tags:
+        - "event"
+      summary: "Returns the service presented in the specified event"
+      operationId: "getEventService"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the event."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Service"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Event not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Event"
+  /people:
+    get:
+      tags:
+        - "person"
+      summary: "Returns all the member of the association"
+      operationId: "retrieveUsers"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Person"
+        "400":
+          description: "Bad request."
+      x-swagger-router-controller: "Person"
+  /person/by_id/{id}:
+    get:
+      tags:
+        - "person"
+      summary: "Returns the member of the association by his/her ID"
+      operationId: "getUserByID"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the person to be retrieved."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Person"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "User not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Person"
+  /person/by_id/{id}/events:
+    get:
+      tags:
+        - "person"
+      summary: "Returns the events related to the specified member of the association"
+      operationId: "getUserEvents"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the person."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "User not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Person"
+  /person/by_id/{id}/services:
+    get:
+      tags:
+        - "person"
+      summary: "Returns the services related to the specified member of the association"
+      operationId: "getUserServices"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the person."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Service"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "User not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Person"
+  /services:
+    get:
+      tags:
+        - "service"
+      summary: "Returns all the services offered by the association"
+      operationId: "retrieveServices"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Service"
+        "400":
+          description: "Bad request."
+      x-swagger-router-controller: "Service"
+  /service/by_id/{id}:
+    get:
+      tags:
+        - "service"
+      summary: "Returns the service by its ID"
+      operationId: "getServiceById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the service to be retrieved."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Service"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Service not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Service"
+  /service/by_id/{id}/events:
+    get:
+      tags:
+        - "service"
+      summary: "Returns the events related to the specified service"
+      operationId: "getServiceEvents"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the service."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Service not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Service"
+  /service/by_id/{id}/people:
+    get:
+      tags:
+        - "service"
+      summary: "Returns the people related to the specified service"
+      operationId: "getServicePeople"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Id of the service."
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Person"
+        "400":
+          description: "Bad request."
+        "404":
+          description: "Service not found."
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Service"
+definitions:
+  Event:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      date_time:
+        type: "string"
+        format: "date-time"
+      presentation:
+        type: "string"
+      practical_info:
+        type: "string"
+      skill_level:
+        type: "string"
+      image_url:
+        type: "string"
+    example:
+      id: 1
+      name: "event name"
+      date_time: "2017-07-21T17:32:28Z"
+      presentation: "event presentation"
+      practical_info: "event practical_info"
+      skill_level: "skill level required"
+      image_url: "image_url"
+  Person:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      email:
+        type: "string"
+        format: "email"
+      telephone:
+        type: "string"
+      description:
+        type: "string"
+      leitmotiv:
+        type: "string"
+      skills:
+        type: "array"
+        items:
+          type: "string"
+      image_url:
+        type: "string"
+    example:
+      id: 1
+      name: "Stefano"
+      surname: "Maini"
+      email: "stefano.maini@mail.com"
+      telephone: "0123456789"
+      description: "person description"
+      leitmotiv: "It Won’t Fail Because of Me"
+      skills:
+        - "Python pro master"
+        - "Illustrator lover"
+      image_url: "image_url"
+  Service:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      presentation:
+        type: "string"
+      practical_info:
+        type: "string"
+      images_url:
+        type: "array"
+        items:
+          type: "string"
+    example:
+      id: 1
+      name: "service name"
+      presentation: "service presentation"
+      practical_info: "service practical_info"
+      images_url:
+        - "image_url_1"
+        - "image_url_2"
+        - "image_url_3"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+    example:
+      code: 404
+      message: "error"
