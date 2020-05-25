@@ -49,9 +49,9 @@ a short presentation, some practical info, and an array of urls for the associat
 Describe with an ER diagram the model used in the data layer of your web application. How these map to the OpenAPI data model?
 ## Implementation
 ### Tools used
-####Environment
+#### Environment
 - Node.js: an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a web browser.
-####Tools
+#### Tools
 - WebStorm: a powerful and intelligent IDE that gives you the best coding assistance for JavaScript, 
 HTML and CSS and a wide range of modern web technologies. WebStorm is perfectly equipped for complex client-side 
 development and server-side development with Node.js;
@@ -60,9 +60,9 @@ features available in the standalone IDE for databases, DataGrip. It enables han
 databases along with SQL language support;
 - Swagger Editor: open source editor fully dedicated to OpenAPI-based APIs.The Swagger Editor is an easy way to 
 get started with the OpenAPI Specification (formerly known as Swagger), with support for Swagger 2.0 and OpenAPI 3.0.
-####Languages
+#### Languages
 - JavaScript.
-####Frameworks and Libraries
+#### Frameworks and Libraries
 - Knex.js: Knex.js is a "batteries included" SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, 
 and Amazon Redshift designed to be flexible, portable, and fun to use. It features both traditional 
 node style callbacks as well as a promise interface for cleaner async flow control, a stream interface, 
