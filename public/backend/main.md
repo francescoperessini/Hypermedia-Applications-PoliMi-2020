@@ -8,7 +8,6 @@
 | 3 | Member | Tommaso | Peresson | 10526013 | tommaso.peresson@mail.polimi.it |
 
 ## Links to other deliverables
-
  - Deliverable D0: the web application is accessible at [this address](https://martina-peressini-peresson.herokuapp.com).
  - Deliverable D2: the YAML or JSON file containing the specification of the app
   API can be found at [this address](https://martina-peressini-peresson.herokuapp.com/backend/spec.yaml).
@@ -24,12 +23,15 @@
 ## Specification
 ### Web Architecture
 ![Three tier architecture](multi-tier.png)
+The web architecture implemented is a three tier one: Presentation, Application and Data layers represent the three different 
+actors which interact between them as shown in the picture above.
 
+More in detail, the Presentation layer presents data to the user by rendering HTML pages, both the static and the dynamic part, 
+the Application layer interacts with the Presentation and the Data layers respectively responding to the API requests received 
+by the client and retrieving data from the database. Finally, the Data layer represents the DBMS, in our case a PostgreSQL database server.
 
+It is ensured that the HTML is rendered client side (in the Presentation layer) since the HTML pages are rendered using an API schema.
 
-
-
-Describe here, with a diagram, the components of your web application and how they interact. Highlight which parts belong to the application layer, data layer or presentation layer. How did you ensure that HTML is not rendered server side?
 ### API
 #### REST compliance
 Describe here to what extent did you follow REST principles and what are the reasons for which you might have decided to diverge. Note, you must not describe the whole API here, just the design decisions.
