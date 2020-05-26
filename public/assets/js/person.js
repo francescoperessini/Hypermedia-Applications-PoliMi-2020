@@ -46,8 +46,9 @@ function truncate(string, end) {
     return string
 }
 
+let person;
 async function loadPerson(id) {
-    let person;
+
     try {
         let response = await fetch('/v1/person/by_id/' + id);
         if (response.ok) {
@@ -121,4 +122,8 @@ $(async function () {
     await loadPerson(person_id);
     await loadEvents(person_id);
     await loadServices(person_id);
+
+    $("#nav_info_person").attr("href", "person.html?id="+person_id)
+    $("#nav_info_person").append("/ "+ person.name + " " + person.surname )
+
 });

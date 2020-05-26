@@ -141,6 +141,10 @@ $(async function () {
     $("#next").prepend(monthDict[Object.keys(monthDict)[getNextMonth(month)]]);
     $("#prev").append(monthDict[Object.keys(monthDict)[getPreviousMonth(month)]])
 
+    $("#nav_info_events_by_month").attr("href", "events_by_month.html?month="+month)
+    $("#nav_info_events_by_month").append("/ "+ monthDict[month] )
+
+
     $(document).ready(function () {
         $("#next").click(function () {
             redirect(month, +1)

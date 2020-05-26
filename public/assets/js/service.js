@@ -24,9 +24,9 @@ getCardRelatedPeople = function (person) {
         '                </div>\n' +
         '            </div>'
 }
-
+let service
 async function getService(id) {
-    let service;
+    //let service;
     try {
         let response = await fetch('/v1/service/by_id/' + id);
         if (response.ok) {
@@ -86,7 +86,13 @@ async function getInvolvedPeople(id) {
 
 $(async function () {
     const service_id = $.urlParam("id");
+
     await getService(service_id)
     await getEvents(service_id)
     await getInvolvedPeople(service_id)
+
+    $("#nav_infos_service_name").attr("href", "service.html?id="+service_id)
+    $("#nav_infos_service_name").append("/ "+ service.name )
+
+
 });
