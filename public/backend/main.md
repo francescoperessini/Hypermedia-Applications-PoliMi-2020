@@ -35,7 +35,17 @@ It is ensured that the HTML is rendered client side (in the Presentation layer) 
 
 ### API
 #### REST compliance
-Describe here to what extent did you follow REST principles and what are the reasons for which you might have decided to diverge. Note, you must not describe the whole API here, just the design decisions.
+We followed the main architectural constraints that describe a RESTful system: 
+- Client-server architecture: the client can only interact with the server through its public exposed endpoints; moreover, 
+the client and the server are able to work and evolve independently;
+- Statelessness: no client information are stored on the server between requests: each request from any client 
+contains all the information necessary to service the request. No session information are stored to authenticate the users; 
+- Cacheability: no caching mechanism has been implemented server side; content caching takes place only via the browser;
+- Code on demand: server only responds to the client's requests through static representation of the data available in the 
+database (in the form of JSON files);
+- Uniform interface: individual resources are identified in requests: the server sends data from its database as JSON files without 
+exposing its internal representation; each message received by the client includes enough information to describe how to 
+process the message.
 #### OpenAPI Resource models
 - Event: represents a generic event offered by the Association; it contains the ID of the event, its name, date and time, a short presentation, some practical info, the skill 
 level required and the url of the associated image;
@@ -46,6 +56,9 @@ a short presentation, some practical info, and an array of urls for the associat
 - Error: represents the generic structure for the errors returned by the server; it contains the response code 
 (for example 400/404), and a short message to explain what went wrong with the request. 
 ### Data model
+Below are shown the ER diagram, and the Logical Design of the data layer used in our web application.
+![ER](er.png)
+
 ![Logical design](logical.png)
 
 Describe with an ER diagram the model used in the data layer of your web application. How these map to the OpenAPI data model?
