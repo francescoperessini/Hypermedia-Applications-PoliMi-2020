@@ -130,7 +130,6 @@ async function getEventService(id) {
 }
 
 function redirect(id, increment) {
-    console.log(month)
     let indexOfEvent = 0;
     eventList.forEach((event) => {
         if (event["id"] == id) {
