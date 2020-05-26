@@ -5,9 +5,25 @@ $.urlParam = function (id) {
 
 
 let eventList = []
+let event
+
+monthDict = {
+    jan: "January",
+    feb: "February",
+    mar: "March",
+    apr: "April",
+    may: "May",
+    jun: "June",
+    jul: "July",
+    aug: "August",
+    sep: "September",
+    oct: "October",
+    nov: "November",
+    dec: "December"
+}
 
 async function getEvent(id) {
-    let event;
+    //let event;
     try {
         let response = await fetch('/v1/event/by_id/' + id);
         if (response.ok) {
@@ -113,7 +129,8 @@ async function getEventService(id) {
     return undefined
 }
 
-function redirect(id, increment, month) {
+function redirect(id, increment) {
+    console.log(month)
     let indexOfEvent = 0;
     eventList.forEach((event) => {
         if (event["id"] == id) {
@@ -162,12 +179,28 @@ $(async function () {
     } catch (e) {
         console.log(e)
     } finally {
+
+
+
+        month_idx = event.event_date.split("-")[1].substr(1,1)
+
+        var keys = Object.keys( monthDict );
+        var month_cut = keys[month_idx-1]
+        var month_str = monthDict[month_cut]
+
+        $("#nav_info_events_by_month").attr("href", "events_by_month.html?month="+ month_cut).append("/ " +  month_str)
+
+        $("#nav_info_event_name").attr("href", "event.html?id=" + event_id).append(" / " +  event.name)
+
         $(document).ready(function () {
             $("#next").click(function () {
                 redirect(event_id, +1)
             });
             $("#prev").click(function () {
                 redirect(event_id, -1)
+            });
+            $("#all_month_events").click(function () {
+                window.location.href = ('events_by_month.html?month=' + month_cut );
             });
         });
     }
