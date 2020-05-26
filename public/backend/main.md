@@ -46,6 +46,8 @@ a short presentation, some practical info, and an array of urls for the associat
 - Error: represents the generic structure for the errors returned by the server; it contains the response code 
 (for example 400/404), and a short message to explain what went wrong with the request. 
 ### Data model
+![Logical design](logical.png)
+
 Describe with an ER diagram the model used in the data layer of your web application. How these map to the OpenAPI data model?
 ## Implementation
 ### Tools used
