@@ -92,12 +92,31 @@ responses between different query clients and dialects;
 Describe here:
 - How did you make sure your web application adheres to the provided OpenAPI specification? Which method did you use to test all APIs endpoints against the expected response?
 - Why do you think your web application adheres to common practices to partition a REST-based web application (static assets vs. application data)
-- Describe synthetically why and how did you manage session state, what are the state change triggering actions (e.g., POST to login etc..).
 - Which technology did you use (relational or a no-SQL database) for managing the data model?
 ## Other information
 ### Task assignment
-Describe here how development tasks have been subdivided among members of the group, e.g.:
-> - Foo worked on front end (80%) and OpenAPI Spec (20% of the time) > - Bar worked on ....
+The workload was divided equally between us: 
+
+Francesco Peressini
+- Design: formalization of the IDM models, ER schema, wireframes and scenarios. (*)
+- Frontend: jQuery scripting to enable dynamic HTML contents.
+- Backend: APIs design; development of the assigned APIs and maintained the backend during the whole project; database 
+maintenance.
+
+Stefano Martina
+- Design: formalization of the IDM models, ER schema, wireframes and scenarios. (*)
+- Frontend: designed Homepage, Association, Services, Service, Events by Month pages; implemented shared elements like 
+navigation bar and orientation info; jQuery scripting to enable dynamic HTML contents.
+- Backend: APIs design.
+
+Tommaso Peresson
+- Design: formalization of the IDM models, ER schema, wireframes and scenarios. (*)
+- Frontend: designed Homepage, Events, Event, People, Person, 404 pages; implemented shared elements like footer and 
+orientation info; jQuery scripting to enable dynamic HTML contents.
+- Backend: APIs design.
+
+(*) Please note that, for what concerning the Design part of the project, most of the work was done together during multiple 
+video call sessions.  
 ### Analysis of existing API
 Describe here the research of (full or part of) existing APIs that are similar in objectives and scope to the one implemented, that have possibly guided implementation choices (these should not be necessarily OpenAPI implementations). Toy APIs (such as the Swagger's Pet Store) or the example shown during lectures are not a valid response.
 Use TWO or more items of the form:
