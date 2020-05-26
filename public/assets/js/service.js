@@ -3,6 +3,8 @@ $.urlParam = function (name) {
     return results[1] || 0;
 };
 
+let serviceList = []
+
 getCardRelatedEvents = function (event) {
     return '<div class="card border-0">\n' +
         '                <img src="' + event.image_url + '" class="card-img-top rounded-circle h-30" alt="' + event.name + ' photo">\n' +
@@ -84,6 +86,36 @@ async function getInvolvedPeople(id) {
     }
 }
 
+function redirect(id, increment) {
+    let indexOfEvent = 0;
+    serviceList.forEach((service) => {
+        if (service["id"] == id) {
+            indexOfEvent = serviceList.indexOf(service);
+        }
+    })
+    indexOfEvent = indexOfEvent + (increment);
+    indexOfEvent = indexOfEvent < 0 ? serviceList.length - 1 : indexOfEvent;
+    indexOfEvent = indexOfEvent % serviceList.length
+
+    window.location.href = ('service.html?id=' + serviceList[indexOfEvent]["id"] );
+
+}
+
+async function loadServiceList() {
+    try {
+        let response = await fetch('/v1/services/');
+        if (response.ok) {
+            serviceList = await response.json();
+
+        } else {
+            window.location.replace("../404.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
+}
+
 $(async function () {
     const service_id = $.urlParam("id");
 
@@ -95,4 +127,15 @@ $(async function () {
     $("#nav_infos_service_name").append("/ "+ service.name )
 
 
+    await loadServiceList()
+
+
+    $(document).ready(function () {
+        $("#next").click(function () {
+            redirect(service_id, +1)
+        });
+        $("#prev").click(function () {
+            redirect(service_id, -1)
+        });
+    });
 });

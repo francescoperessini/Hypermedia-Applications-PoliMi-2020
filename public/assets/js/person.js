@@ -3,6 +3,8 @@ $.urlParam = function (name) {
     return results[1] || 0;
 };
 
+let peopleList = []
+
 skills_list_function = function (skills) {
     let html = ""
     skills.forEach((skill) => {
@@ -18,23 +20,23 @@ function getRow(content) {
 
 }
 
-function getCard(content) {
+function getCard(content, type) {
     let image_url = '' + content["image_url"];
     let image_urls = content["image_urls"];
     if (image_urls) image_url = image_urls[0];
     let name = content["name"];
     let presentation = content["presentation"];
 
-    return '                    <div class="card h-100">\n' +
+    return '                    <div class="card">\n' +
         '                        <img class="card-img-top img-fluid"\n' +
         '                             src="' + image_url + '"\n' +
         '                             alt="Card image cap">\n' +
         '                        <div class="card-body">\n' +
         '                            <h4 class="card-title">' + name + '</h4>\n' +
         '                            <p class="card-text">' + truncate(presentation, 100) +
-        '                                </p>\n' +
+        '                            </p>\n' +
+        '  <a class="btn btn-secondary" href="'+ type +'.html?id=' + content['id'] + '">Learn More...</a>' +
 
-        '\n' +
         '                        </div>\n' +
         '                    </div>\n';
 }
@@ -58,7 +60,7 @@ async function loadPerson(id) {
             $("#description").html(person.description)
             $("#phone_number").append(" " + person.telephone)
             $("#email").append(" " + person.email)
-            $("#person_img").attr("src", person.image_url).attr("alt", person.name + person.surname +"'s profile photo")
+            $("#person_img").attr("src", person.image_url).attr("alt", person.name + person.surname + "'s profile photo")
             $('#skills_list').append(skills_list_function(person.skills))
         } else {
             window.location.replace("../index.html");
@@ -78,7 +80,7 @@ async function loadEvents(id) {
             let html = '';
             events.forEach(
                 (event) => {
-                    html += getCard(event);
+                    html += getCard(event, 'event');
                 }
             )
             html = getRow(html);
@@ -102,7 +104,7 @@ async function loadServices(id) {
             let html = '';
             services.forEach(
                 (event) => {
-                    html += getCard(event);
+                    html += getCard(event, 'service');
                 }
             )
             html = getRow(html);
@@ -116,6 +118,35 @@ async function loadServices(id) {
     }
 }
 
+function redirect(id, increment) {
+    let indexOfEvent = 0;
+    peopleList.forEach((person) => {
+        if (person["id"] == id) {
+            indexOfEvent = peopleList.indexOf(person);
+        }
+    })
+    indexOfEvent = indexOfEvent + (increment);
+    indexOfEvent = indexOfEvent < 0 ? peopleList.length - 1 : indexOfEvent;
+    indexOfEvent = indexOfEvent % peopleList.length
+
+    window.location.href = ('person.html?id=' + peopleList[indexOfEvent]["id"] );
+
+}
+
+async function loadPersonList() {
+    try {
+        let response = await fetch('/v1/people/');
+        if (response.ok) {
+            peopleList = await response.json();
+
+        } else {
+            window.location.replace("../404.html");
+        }
+    } catch (e) {
+        //Network error
+        console.log(e);
+    }
+}
 
 $(async function () {
     const person_id = $.urlParam("id");
@@ -126,4 +157,14 @@ $(async function () {
     $("#nav_info_person").attr("href", "person.html?id="+person_id)
     $("#nav_info_person").append("/ "+ person.name + " " + person.surname )
 
+    await loadPersonList();
+
+    $(document).ready(function () {
+        $("#next").click(function () {
+            redirect(person_id, +1)
+        });
+        $("#prev").click(function () {
+            redirect(person_id, -1)
+        });
+    });
 });
