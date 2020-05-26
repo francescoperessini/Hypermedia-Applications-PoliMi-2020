@@ -57,11 +57,14 @@ a short presentation, some practical info, and an array of urls for the associat
 (for example 400/404), and a short message to explain what went wrong with the request. 
 ### Data model
 Below are shown the ER diagram, and the Logical Design of the data layer used in our web application.
+
 ![ER](er.png)
 
 ![Logical design](logical.png)
 
-Describe with an ER diagram the model used in the data layer of your web application. How these map to the OpenAPI data model?
+Except for the Error model, there is a 1 to 1 correspondence between the Event, Person and Service tables presented above and 
+the correspondent OpenAPI resource models.
+
 ## Implementation
 ### Tools used
 #### Environment
