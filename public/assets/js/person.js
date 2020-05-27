@@ -164,8 +164,8 @@ $(async function () {
     await loadEvents(person_id);
     await loadServices(person_id);
 
-    $("#nav_info_person").attr("href", "person.html?id=" + person_id)
-    $("#nav_info_person").append("/ " + person.name + " " + person.surname)
+    $("#nav_info_person").attr("href", "person.html?id=" + person_id).append("/ " + person.name + " " + person.surname)
+
 
     await loadPersonList();
 

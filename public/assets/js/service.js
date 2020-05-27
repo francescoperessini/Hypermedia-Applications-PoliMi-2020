@@ -5,18 +5,35 @@ $.urlParam = function (name) {
 
 let serviceList = []
 
-getCardRelatedEvents = function (event) {
-    return '<div class="card border-0">\n' +
-        '                <img src="' + event.image_url + '" class="card-img-top rounded-circle h-30" alt="' + event.name + ' photo">\n' +
-        '                <div class="card-body text-center">\n' +
-        '                    <h5 class="card-title">' + event.name + '</h5>\n' +
-        '                    <p class="card-text">' + event.practical_info.substr(0, 150) + '...</p>\n' +
-        '<a href="/pages/event.html?id=' + event.id + '"><button type="button" class="btn btn-secondary">View More</button></a>' +
-        '                </div>\n' +
-        '            </div>'
+function truncate(string, end) {
+    if (string.length > end) {
+        return string.substring(0, end) + '...';
+    }
+    return string
 }
 
-getCardRelatedPeople = function (person) {
+
+function getCardRelatedEvents (content, type) {
+    let image_url = '' + content["image_url"];
+    let image_urls = content["image_urls"];
+    if (image_urls) image_url = image_urls[0];
+    let name = content["name"];
+    let presentation = content["presentation"];
+
+    return '                    <div class="card h-100">\n' +
+        '                        <img class="card-img-top img-fluid"\n' +
+        '                             src="' + image_url + '"\n' +
+        '                             alt="Card image cap">\n' +
+        '                        <div class="card-body">\n' +
+        '                            <h4 class="card-title">' + name + '</h4>\n' +
+        '                            <p class="card-text">' + truncate(presentation, 100) +
+        '                            </p>\n' +
+        '  <a class="btn btn-secondary" href="' + type + '.html?id=' + content['id'] + '">Learn More...</a>' +
+
+        '                        </div>\n' +
+        '                    </div>\n';
+}
+function getCardRelatedPeople (person) {
     return '<div class="card border-0">\n' +
         '                <img src="' + person.image_url + '" class="card-img-top rounded-circle" alt="' + person.name + ' ' + person.surname + ' profile photo">\n' +
         '                <div class="card-body text-center">\n' +
@@ -48,16 +65,34 @@ async function getService(id) {
     }
 }
 
+function getRow(content, active = false) {
+    return '<div class="carousel-item '+ (active?' active':'') +'"><div class="card-deck">\n' +
+        content +
+        '            </div>' +
+        '</div>';
+
+}
+
 async function getEvents(id) {
     let events;
     try {
         let response = await fetch('/v1/service/by_id/' + id + '/events');
         if (response.ok) {
             events = await response.json();
-            let html = "";
-            events.forEach((event) => {
-                html += getCardRelatedEvents(event)
-            })
+            let html = '';
+            let i = 0;
+            let innerHTML = '';
+            events.forEach(
+                (event) => {
+                    if (!(i % 4) && i !== 0) {
+                        html += getRow(innerHTML);
+                        innerHTML = '';
+                    }
+                    innerHTML += getCardRelatedEvents(event, 'event');
+                    i++;
+                }
+            )
+            html += getRow(innerHTML, true);
             $('#related-events').append(html);
         } else {
             window.location.replace("./404.html");
@@ -66,6 +101,13 @@ async function getEvents(id) {
         //Network error
         console.log(e);
     }
+}
+
+function truncate(string, end) {
+    if (string.length > end) {
+        return string.substring(0, end) + '...';
+    }
+    return string
 }
 
 async function getInvolvedPeople(id) {
@@ -141,3 +183,18 @@ $(async function () {
         });
     });
 });
+
+(function ($) {
+    "use strict";
+
+    // manual carousel controls
+    $('.next').click(function () {
+        $('.carousel').carousel('next');
+        return false;
+    });
+    $('.prev').click(function () {
+        $('.carousel').carousel('prev');
+        return false;
+    });
+
+})(jQuery);
