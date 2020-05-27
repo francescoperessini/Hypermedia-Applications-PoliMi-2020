@@ -20,7 +20,7 @@ function getCardRelatedEvents (content, type) {
     let name = content["name"];
     let presentation = content["presentation"];
 
-    return '                    <div class="card h-100">\n' +
+    return '                    <div class="card">\n' +
         '                        <img class="card-img-top img-fluid"\n' +
         '                             src="' + image_url + '"\n' +
         '                             alt="Card image cap">\n' +
@@ -34,8 +34,8 @@ function getCardRelatedEvents (content, type) {
         '                    </div>\n';
 }
 function getCardRelatedPeople (person) {
-    return '<div class="card border-0">\n' +
-        '                <img src="' + person.image_url + '" class="card-img-top rounded-circle" alt="' + person.name + ' ' + person.surname + ' profile photo">\n' +
+    return '<div class="card ">\n' +
+        '                <img src="' + person.image_url + '" class="card-img-top" alt="' + person.name + ' ' + person.surname + ' profile photo">\n' +
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + person.name + ' ' + person.surname + '</h5>\n' +
         '                    <p class="card-text">' + person.description.substr(0, 100) + '...</p>\n' +
