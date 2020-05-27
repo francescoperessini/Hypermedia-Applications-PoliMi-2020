@@ -103,7 +103,7 @@ async function getEventOrganizer(id) {
             person = await response.json();
             return person
         } else {
-            //window.location.replace("./404.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -120,7 +120,7 @@ async function getEventService(id) {
             service = await response.json();
             return service
         } else {
-            //window.location.replace("./404.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -158,7 +158,7 @@ async function loadMonthEvents(id) {
             })
 
         } else {
-            //window.location.replace("./404.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
