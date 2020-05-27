@@ -26,7 +26,7 @@ function getCard(content, type) {
     let image_urls = content["image_urls"];
     if (image_urls) image_url = image_urls[0];
     let name = content["name"];
-    let presentation = content["presentation"];
+    let presentation = content["practical_info"];
     let skill_level = content['skill_level'];
 
     return '                    <div class="card">\n' +
@@ -84,10 +84,17 @@ async function loadEvents(id) {
             let html = '';
             let i = 0;
             let innerHTML = '';
+            let columns = 4
+            if (screen.width < 376){
+                columns = 1
+            }
+            if (screen.width > 376 && screen.width < 800){
+                columns = 2
+            }
             events.forEach(
                 (event) => {
 
-                    if (!(i % 4) && i !== 0) {
+                    if (!(i % columns) && i !== 0) {
                         html += getRow(innerHTML);
                         innerHTML = '';
                     }
