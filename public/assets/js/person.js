@@ -14,7 +14,7 @@ skills_list_function = function (skills) {
 }
 
 function getRow(content, active = false) {
-    return '<div class="carousel-item '+ (active?' active':'') +'"><div class="card-deck">\n' +
+    return '<div class="carousel-item '+ (active?' active':'') +'"><div class="card-deck ">\n' +
         content +
         '            </div>' +
         '</div>';
