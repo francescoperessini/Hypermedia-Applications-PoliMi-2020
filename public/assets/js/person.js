@@ -35,7 +35,7 @@ function getCard(content, type) {
         '                            <h4 class="card-title">' + name + '</h4>\n' +
         '                            <p class="card-text">' + truncate(presentation, 100) +
         '                            </p>\n' +
-        '  <a class="btn btn-secondary" href="'+ type +'.html?id=' + content['id'] + '">Learn More...</a>' +
+        '  <a class="btn btn-secondary" href="' + type + '.html?id=' + content['id'] + '">Learn More...</a>' +
 
         '                        </div>\n' +
         '                    </div>\n';
@@ -49,6 +49,7 @@ function truncate(string, end) {
 }
 
 let person;
+
 async function loadPerson(id) {
 
     try {
@@ -63,7 +64,7 @@ async function loadPerson(id) {
             $("#person_img").attr("src", person.image_url).attr("alt", person.name + person.surname + "'s profile photo")
             $('#skills_list').append(skills_list_function(person.skills))
         } else {
-            window.location.replace("../index.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -86,7 +87,7 @@ async function loadEvents(id) {
             html = getRow(html);
             $('#events').append(html);
         } else {
-            //window.location.replace("../index.html");
+            //window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -110,7 +111,7 @@ async function loadServices(id) {
             html = getRow(html);
             $('#services').append(html);
         } else {
-            //window.location.replace("../index.html");
+            //window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -129,7 +130,7 @@ function redirect(id, increment) {
     indexOfEvent = indexOfEvent < 0 ? peopleList.length - 1 : indexOfEvent;
     indexOfEvent = indexOfEvent % peopleList.length
 
-    window.location.href = ('person.html?id=' + peopleList[indexOfEvent]["id"] );
+    window.location.href = ('person.html?id=' + peopleList[indexOfEvent]["id"]);
 
 }
 
@@ -140,7 +141,7 @@ async function loadPersonList() {
             peopleList = await response.json();
 
         } else {
-            window.location.replace("../404.html");
+            //window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -154,8 +155,8 @@ $(async function () {
     await loadEvents(person_id);
     await loadServices(person_id);
 
-    $("#nav_info_person").attr("href", "person.html?id="+person_id)
-    $("#nav_info_person").append("/ "+ person.name + " " + person.surname )
+    $("#nav_info_person").attr("href", "person.html?id=" + person_id)
+    $("#nav_info_person").append("/ " + person.name + " " + person.surname)
 
     await loadPersonList();
 

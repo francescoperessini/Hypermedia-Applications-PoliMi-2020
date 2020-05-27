@@ -37,7 +37,7 @@ async function getEvent(id) {
             $('#image').attr("src", event["image_url"])
             $('#image').attr("alt", event["name"] + '_image')
         } else {
-            window.location.replace("../index.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -54,9 +54,9 @@ function getCard(content, type) {
     let presentation = content["presentation"] || content["description"];
     let id = content['id'];
     let title
-    if(type === 'person'){
+    if (type === 'person') {
         title = '<h1 class="text-center">Organized by</h1>'
-    }else if (type === 'service'){
+    } else if (type === 'service') {
         title = '<h1 class="text-center">Related service</h1>'
     }
     return '    <div class="col-md-8 col-lg-6 col-xl-6 py-2">' + title +
@@ -103,7 +103,7 @@ async function getEventOrganizer(id) {
             person = await response.json();
             return person
         } else {
-            //window.location.replace("../index.html");
+            //window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -120,7 +120,7 @@ async function getEventService(id) {
             service = await response.json();
             return service
         } else {
-            //window.location.replace("../index.html");
+            //window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -140,9 +140,9 @@ function redirect(id, increment) {
     indexOfEvent = indexOfEvent < 0 ? eventList.length - 1 : indexOfEvent;
     indexOfEvent = indexOfEvent % eventList.length
 
-    console.log('event.html?id=' + eventList[indexOfEvent] )
+    console.log('event.html?id=' + eventList[indexOfEvent])
 
-    window.location.href = ('event.html?id=' + eventList[indexOfEvent]["id"] );
+    window.location.href = ('event.html?id=' + eventList[indexOfEvent]["id"]);
 
 
 }
@@ -150,7 +150,7 @@ function redirect(id, increment) {
 async function loadMonthEvents(id) {
     let events;
     try {
-        let response = await fetch('/v1/event/by_id/'+ id +'/related_events');
+        let response = await fetch('/v1/event/by_id/' + id + '/related_events');
         if (response.ok) {
             events = await response.json();
             events.forEach((event) => {
@@ -158,7 +158,7 @@ async function loadMonthEvents(id) {
             })
 
         } else {
-            //window.location.replace("../index.html");
+            //window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -180,16 +180,15 @@ $(async function () {
     } finally {
 
 
+        month_idx = event.event_date.split("-")[1].substr(1, 1)
 
-        month_idx = event.event_date.split("-")[1].substr(1,1)
-
-        var keys = Object.keys( monthDict );
-        var month_cut = keys[month_idx-1]
+        var keys = Object.keys(monthDict);
+        var month_cut = keys[month_idx - 1]
         var month_str = monthDict[month_cut]
 
-        $("#nav_info_events_by_month").attr("href", "events_by_month.html?month="+ month_cut).append("/ " +  month_str)
+        $("#nav_info_events_by_month").attr("href", "events_by_month.html?month=" + month_cut).append("/ " + month_str)
 
-        $("#nav_info_event_name").attr("href", "event.html?id=" + event_id).append(" / " +  event.name)
+        $("#nav_info_event_name").attr("href", "event.html?id=" + event_id).append(" / " + event.name)
 
         $(document).ready(function () {
             $("#next").click(function () {
@@ -199,7 +198,7 @@ $(async function () {
                 redirect(event_id, -1)
             });
             $("#all_month_events").click(function () {
-                window.location.href = ('events_by_month.html?month=' + month_cut );
+                window.location.href = ('events_by_month.html?month=' + month_cut);
             });
         });
     }

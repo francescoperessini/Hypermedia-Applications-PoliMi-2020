@@ -18,7 +18,7 @@ getCardRelatedEvents = function (event) {
 
 getCardRelatedPeople = function (person) {
     return '<div class="card border-0">\n' +
-        '                <img src="' + person.image_url + '" class="card-img-top rounded-circle" alt="' + person.name +' '+ person.surname + ' profile photo">\n' +
+        '                <img src="' + person.image_url + '" class="card-img-top rounded-circle" alt="' + person.name + ' ' + person.surname + ' profile photo">\n' +
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + person.name + ' ' + person.surname + '</h5>\n' +
         '                    <p class="card-text">' + person.description.substr(0, 100) + '...</p>\n' +
@@ -27,6 +27,7 @@ getCardRelatedPeople = function (person) {
         '            </div>'
 }
 let service
+
 async function getService(id) {
     //let service;
     try {
@@ -38,7 +39,7 @@ async function getService(id) {
             //TODO carousel of images
             $("#service_img").attr("src", service.image_urls[0]).attr("alt", service.name + " photo");
         } else {
-            window.location.replace("../index.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -58,7 +59,7 @@ async function getEvents(id) {
             })
             $('#related-events').append(html);
         } else {
-            window.location.replace("../index.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -78,7 +79,7 @@ async function getInvolvedPeople(id) {
             })
             $('#involved-people').append(html)
         } else {
-            window.location.replace("../index.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -97,7 +98,7 @@ function redirect(id, increment) {
     indexOfEvent = indexOfEvent < 0 ? serviceList.length - 1 : indexOfEvent;
     indexOfEvent = indexOfEvent % serviceList.length
 
-    window.location.href = ('service.html?id=' + serviceList[indexOfEvent]["id"] );
+    window.location.href = ('service.html?id=' + serviceList[indexOfEvent]["id"]);
 
 }
 
@@ -108,7 +109,7 @@ async function loadServiceList() {
             serviceList = await response.json();
 
         } else {
-            window.location.replace("../404.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -123,8 +124,8 @@ $(async function () {
     await getEvents(service_id)
     await getInvolvedPeople(service_id)
 
-    $("#nav_infos_service_name").attr("href", "service.html?id="+service_id)
-    $("#nav_infos_service_name").append("/ "+ service.name )
+    $("#nav_infos_service_name").attr("href", "service.html?id=" + service_id)
+    $("#nav_infos_service_name").append("/ " + service.name)
 
 
     await loadServiceList()

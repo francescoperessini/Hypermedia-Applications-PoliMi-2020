@@ -39,7 +39,7 @@ getCard = function (event, month) {
 
 
     return " <div class=\"col-md-6 col-lg-4 col-xl-3 py-2\"><div class=\" card h-100\">\n" +
-        "                <img class=\"\" src=" + image_url + " alt=\""+name+"\">\n" +
+        "                <img class=\"\" src=" + image_url + " alt=\"" + name + "\">\n" +
         "                <div class=\"card-body\">\n" +
         "                    <h5 class=\"card-title\">" + name + "</h5>\n" +
         "                        <div class=\"p-1 text-left\">\n" +
@@ -88,14 +88,14 @@ async function loadEventsByMonth(month) {
             let html = "";
             let rowContent = "";
             events.forEach((event) => {
-                rowContent += getCard(event,month)
+                rowContent += getCard(event, month)
             })
             html += getRow(rowContent)
 
 
             $('#events').append(html);
         } else {
-            window.location.replace("../index.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -141,8 +141,8 @@ $(async function () {
     $("#next").prepend(monthDict[Object.keys(monthDict)[getNextMonth(month)]]);
     $("#prev").append(monthDict[Object.keys(monthDict)[getPreviousMonth(month)]])
 
-    $("#nav_info_events_by_month").attr("href", "events_by_month.html?month="+month)
-    $("#nav_info_events_by_month").append("/ "+ monthDict[month] )
+    $("#nav_info_events_by_month").attr("href", "events_by_month.html?month=" + month)
+    $("#nav_info_events_by_month").append("/ " + monthDict[month])
 
 
     $(document).ready(function () {

@@ -5,7 +5,7 @@ getRow = function (person) {
         '            <div class="row badge-light ">\n' +
         '                <!--USER PHOTO-->\n' +
         '                <div class="col-md-3 text-center">\n' +
-        '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 mr-4" src="' + person.image_url + '" alt="'+ person.name + person.surname +' profile photo">\n' +
+        '                    <img class="rounded-circle custom-rounded-circle mt-4 mb-4 mr-4" src="' + person.image_url + '" alt="' + person.name + person.surname + ' profile photo">\n' +
         '                </div>\n' +
         '                <!--USER DESCRIPTION-->\n' +
         '                <div class="col-md-9 align-self-center text-center">\n' +
@@ -30,7 +30,7 @@ async function getPeople() {
             })
             $('#container').append(html)
         } else {
-            window.location.replace("../index.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
