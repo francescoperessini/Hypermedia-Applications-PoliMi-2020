@@ -123,6 +123,16 @@ body {
     .custom-mobile-card {
         width: 100%;
     }
+
+    .card-img-top {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .home-carousel{
+        height: 250px !important;
+    }
 }
 @media only screen and (min-width: 600px) {
     .custom-mobile-card {
@@ -131,9 +141,9 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-    .card-img-top {
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-    }
+
+}
+
+.home-carousel{
+    max-height: 500px !important;
 }
