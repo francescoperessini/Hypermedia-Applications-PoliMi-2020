@@ -30,7 +30,6 @@ async function getServices() {
             services.forEach((service) => {
 
                 content_html += getCard(service, i)
-                console.log(content_html)
                 i++;
             })
             html = getRow(content_html)
