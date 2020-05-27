@@ -131,6 +131,8 @@ body {
 }
 
 
+
+
 @media only screen and (max-width: 600px) {
     .custom-mobile-card {
         width: 100%;
@@ -149,6 +151,12 @@ body {
 @media only screen and (min-width: 600px) {
     .custom-mobile-card {
         width: 50%;
+    }
+
+    .centered-cards{
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
