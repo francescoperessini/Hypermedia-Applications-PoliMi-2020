@@ -49,7 +49,6 @@ let service
 
 async function getService(id) {
     //let service;
-    console.log("entrato")
     try {
         let response = await fetch('/v1/service/by_id/' + id);
         if (response.ok) {
