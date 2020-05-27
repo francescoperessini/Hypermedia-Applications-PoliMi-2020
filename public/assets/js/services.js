@@ -3,7 +3,7 @@ getCard = function (service, i) {
         '                    <img src="' + service.image_urls[0] + '" class="card-img-top rounded-circle" alt="' + service.name + ' photo">\n' +
         '                    <div class="card-body text-center">\n' +
         '                        <a href="/pages/service.html?id=' + service.id + '"><h5 class="card-title">' + service.name + '</h5></a>\n' +
-        '                        <p class="card-text">' + service.presentation + '</p>\n' +
+        '                        <p class="card-text">' + service.practical_info + '</p>\n' +
         '                    </div>\n' +
         '                </div> '
     if (i == 1) {
