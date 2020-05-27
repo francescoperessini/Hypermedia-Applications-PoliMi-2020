@@ -32,10 +32,10 @@ function getCard(content, type) {
     return '                    <div class="card">\n' +
         '                        <img class="card-img-top img-fluid"\n' +
         '                             src="' + image_url + '"\n' +
-        '                             alt="Card image cap">\n' +
+        '                             alt="'+ name +'">\n' +
         '                        <div class="card-body">\n' +
         '                            <h4 class="card-title">' + name + '</h4>\n' +
-        (type==='event'?('<p class="card-text alert alert-secondary">' + skill_level + '</p>'):'') +
+        (type==='event'?('<p class="card-text alert alert-secondary">Skills required: ' + skill_level + '</p>'):'') +
         '                            <p class="card-text">' + truncate(presentation, 100) +
         '                            </p>\n' +
         '  <a class="btn btn-secondary" href="' + type + '.html?id=' + content['id'] + '">Learn More...</a>' +
