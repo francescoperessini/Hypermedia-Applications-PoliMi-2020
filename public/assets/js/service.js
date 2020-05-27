@@ -19,6 +19,7 @@ function getCardRelatedEvents (content, type) {
     if (image_urls) image_url = image_urls[0];
     let name = content["name"];
     let presentation = content["presentation"];
+    let skill_level = content["skill_level"];
 
     return '                    <div class="card h-100">\n' +
         '                        <img class="card-img-top img-fluid"\n' +
@@ -26,6 +27,7 @@ function getCardRelatedEvents (content, type) {
         '                             alt="Card image cap">\n' +
         '                        <div class="card-body">\n' +
         '                            <h4 class="card-title">' + name + '</h4>\n' +
+        '<p class="card-text alert alert-secondary">' + skill_level + '</p>' +
         '                            <p class="card-text">' + truncate(presentation, 100) +
         '                            </p>\n' +
         '  <a class="btn btn-secondary" href="' + type + '.html?id=' + content['id'] + '">Learn More...</a>' +
