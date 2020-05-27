@@ -11,7 +11,7 @@ getCardRelatedEvents = function (event) {
         '                <div class="card-body text-center">\n' +
         '                    <h5 class="card-title">' + event.name + '</h5>\n' +
         '                    <p class="card-text">' + event.practical_info.substr(0, 150) + '...</p>\n' +
-        '<a href="/pages/event.html?id=' + person.id + '"><button type="button" class="btn btn-secondary">View More</button></a>' +
+        '<a href="/pages/event.html?id=' + event.id + '"><button type="button" class="btn btn-secondary">View More</button></a>' +
         '                </div>\n' +
         '            </div>'
 }
@@ -30,6 +30,7 @@ let service
 
 async function getService(id) {
     //let service;
+    console.log("entrato")
     try {
         let response = await fetch('/v1/service/by_id/' + id);
         if (response.ok) {
@@ -124,8 +125,8 @@ $(async function () {
     await getEvents(service_id)
     await getInvolvedPeople(service_id)
 
-    $("#nav_infos_service_name").attr("href", "service.html?id=" + service_id)
-    $("#nav_infos_service_name").append("/ " + service.name)
+    $("#nav_infos_service_name").attr("href", "service.html?id=" + service_id).append("/ " + service.name)
+
 
 
     await loadServiceList()
