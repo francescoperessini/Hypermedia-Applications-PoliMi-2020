@@ -126,10 +126,12 @@ exports.getEventsByMonth = function (month) {
  * returns List
  **/
 exports.getRelatedEvents = function (id) {
+    const current_year = new Date().getFullYear();
     let subquery = sqlDb("event").select(sqlDb.raw('EXTRACT(MONTH FROM ??)', 'event_date')).where({id: id});
     let query = sqlDb("event")
         .select()
         .where(sqlDb.raw('EXTRACT(MONTH FROM ??)', 'event_date'), '=', subquery)
+        .where(sqlDb.raw('EXTRACT(YEAR FROM ??)', 'event_date'), '=', current_year)
         .orderBy("event_date", "asc");
     return getPromiseForQuery(query, id, "Event not found.")
 }
