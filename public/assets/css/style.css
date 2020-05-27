@@ -63,6 +63,18 @@ a:hover {
 
 }
 
+.card-img-top-250 {
+    max-height: 250px;
+    overflow:hidden;
+}
+
+/* smoother transitions */
+.carousel-inner>.carousel-item.next.left,
+.carousel-inner>.carousel-item.prev.right
+{
+    transition: all 1s ease;
+}
+
 .h5-footer {
     color: aliceblue;
 }

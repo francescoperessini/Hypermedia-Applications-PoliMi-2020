@@ -15,136 +15,199 @@
     <title>FreeLab | Person</title>
 </head>
 <body>
-<div class="wrapper">
-    <div id="navbar"></div>
+<div id="navbar"></div>
 
-    <div class="container-fluid content">
-        <div class="row mt-2">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <p>
-                    <a href="/"> / </a>
-                    <a href="/pages/people.html"> People</a>
-                    <a id="nav_info_person" href=""></a>
-                </p>
-            </div>
-            <div class="col-md-1"></div>
+<div class="container-fluid content">
+    <div class="row mt-2">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <p>
+                <a href="/"> / </a>
+                <a href="/pages/people.html"> People</a>
+                <a id="nav_info_person" href=""></a>
+            </p>
         </div>
-        <!-- Group navigation buttons -->
-        <div class="row mt-4">
+        <div class="col-md-1"></div>
+    </div>
+    <!-- Group navigation buttons -->
+    <div class="row mt-4">
 
-            <div class="col-md-2 ml-auto mb-1">
-                <button class="btn btn-secondary w-100 h-100 " id="prev">
-                    <svg class="bi bi-chevron-left" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-                    </svg> View previous person
-                </button>
-            </div>
-            <div class="col-md-2 mx-auto mb-1">
-                <a class="btn btn-secondary w-100 h-100 " href="people.html">
-                    <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg> View all people
-                </a>
-            </div>
-            <div class="col-md-2 mr-auto mb-1">
-                <button class="btn btn-secondary w-100 h-100" id="next">
-                    View next person <svg class="bi bi-chevron-right" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z" clip-rule="evenodd"/>
+        <div class="col-md-2 ml-auto mb-1">
+            <button class="btn btn-secondary w-100 h-100 " id="prev">
+                <svg class="bi bi-chevron-left" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+                          clip-rule="evenodd"/>
                 </svg>
-                </button>
-
-            </div>
+                View previous person
+            </button>
+        </div>
+        <div class="col-md-2 mx-auto mb-1">
+            <a class="btn btn-secondary w-100 h-100 " href="people.html">
+                <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+                View all people
+            </a>
+        </div>
+        <div class="col-md-2 mr-auto mb-1">
+            <button class="btn btn-secondary w-100 h-100" id="next">
+                View next person
+                <svg class="bi bi-chevron-right" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+                          clip-rule="evenodd"/>
+                </svg>
+            </button>
 
         </div>
-        <div class="row mt-5">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-2 col-md-8 mx-auto">
-                <div class="d-flex justify-content-center">
-                    <img id="person_img" class="rounded-circle custom-rounded-circle"/>
-                </div>
-                <div class="d-flex justify-content-center mt-3 mx-3">
-                    <h4 class="name_surname"></h4>
-                </div>
-                <div class="d-flex justify-content-center mx-3">
-                    <p id="brief_description"></p>
-                </div>
 
-
+    </div>
+    <div class="row mt-5">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2 col-md-8 mx-auto">
+            <div class="d-flex justify-content-center">
+                <img id="person_img" class="rounded-circle custom-rounded-circle"/>
             </div>
-            <div class="col-lg-3 col-md-12 col-sm-10 my-auto mr-auto">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-10 mr-auto px-5 d-flex justify-content-left">
-                        <h2 class="text-left">Skills</h2>
-                    </div>
+            <div class="d-flex justify-content-center mt-3 mx-3">
+                <h4 class="name_surname"></h4>
+            </div>
+            <div class="d-flex justify-content-center mx-3">
+                <p id="brief_description"></p>
+            </div>
+
+
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-10 my-auto mr-auto">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-10 mr-auto px-5 d-flex justify-content-left">
+                    <h2 class="text-left">Skills</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-10 mr-auto px-5 d-flex justify-content-left">
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-10 mr-auto px-5 d-flex justify-content-left">
 
-                        <ul class="list" id="skills_list">
+                    <ul class="list" id="skills_list">
 
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-10 mr-auto px-5">
+                    <div class="d-flex justify-content-left">
+                        <ul class="list-unstyled">
+                            <li id="phone_number">T:</li>
+                            <li id="email">E:</li>
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-12 col-sm-12 my-auto mx-auto p-5">
+            <p id="description">
+            </p>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
 
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-10 mr-auto px-5">
-                        <div class="d-flex justify-content-left">
-                            <ul class="list-unstyled">
-                                <li id="phone_number">T:</li>
-                                <li id="email">E:</li>
-                            </ul>
+    <div class="row mt-5 mb-5">
+
+        <div class="col-lg-8 col-md-12 my-4 my-auto mx-auto">
+            <div class="d-flex justify-content-center">
+                <h2 class="p-3">My Services</h2>
+            </div>
+            <section class="carousel slide" data-ride="carousel" id="postsCarousel2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-md-right lead">
+                            <a class="btn btn-secondary-outline prevS" href="" title="go back">
+                                <svg class="bi bi-chevron-left" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                            <a class="btn btn-secondary-outline nextS" href="" title="more">
+                                <svg class="bi bi-chevron-right" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-5 col-md-12 col-sm-12 my-auto mx-auto p-5">
-                <p id="description">
-                </p>
-            </div>
-            <div class="col-lg-1"></div>
-        </div>
+                    <div class="container pt-0 mt-2">
+                        <div class="carousel-inner" id="services">
+                        </div>
 
-        <div class="row mt-5 mb-5">
-            <div class="col-md-1"></div>
-            <div class="col-lg-8 col-md-12 my-auto mx-auto">
-                <div class="d-flex justify-content-center">
-                    <h2 class="p-3">My Services</h2>
-                </div>
-                <div class="container">
-                    <div id="services"></div>
-                    <!--/.Carousel Wrapper-->
-
-
-                </div>
-            </div>
-
-            <div class="col-md-1"></div>
-        </div>
-        <div class="row mt-5 mb-5">
-            <div class="col-md-1"></div>
-            <div class="col-lg-8 col-md-12 my-4 my-auto mx-auto">
-                <div class="d-flex justify-content-center">
-                    <h2 class="p-3">My Events</h2>
-                </div>
-                <div class="container">
-                    <div id="events"></div>
-                    <!--/.Carousel Wrapper-->
-
-
+                    </div>
                 </div>
 
-            </div>
+            </section>
 
-            <div class="col-md-1"></div>
         </div>
 
 
     </div>
+    <div class="row mt-5 mb-5">
+
+        <div class="col-lg-8 col-md-12 my-4 my-auto mx-auto">
+            <div class="d-flex justify-content-center">
+                <h2 class="p-3">My Events</h2>
+            </div>
+            <section class="carousel slide" data-ride="carousel" id="postsCarousel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-md-right lead">
+                            <a class="btn btn-secondary-outline prev" href="" title="go back">
+                                <svg class="bi bi-chevron-left" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                            <a class="btn btn-secondary-outline next" href="" title="more">
+                                <svg class="bi bi-chevron-right" width="1.5em" height="1.5em" viewBox="0 0 16 16"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="container pt-0 mt-2">
+                        <div class="carousel-inner" id="events">
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+        <!--/.Carousel Wrapper-->
 
 
-    <!-- Wrapper -->
+    </div>
+
 </div>
+
+
+</div>
+
 
 <!-- Footer -->
 <div id="footer"></div>

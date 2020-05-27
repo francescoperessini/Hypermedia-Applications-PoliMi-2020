@@ -13,10 +13,11 @@ skills_list_function = function (skills) {
     return html
 }
 
-function getRow(content) {
-    return '<div class="card-deck">\n' +
+function getRow(content, active = false) {
+    return '<div class="carousel-item '+ (active?' active':'') +'"><div class="card-deck">\n' +
         content +
-        '            </div>';
+        '            </div>' +
+        '</div>';
 
 }
 
@@ -27,7 +28,7 @@ function getCard(content, type) {
     let name = content["name"];
     let presentation = content["presentation"];
 
-    return '                    <div class="card">\n' +
+    return '                    <div class="card h-100">\n' +
         '                        <img class="card-img-top img-fluid"\n' +
         '                             src="' + image_url + '"\n' +
         '                             alt="Card image cap">\n' +
@@ -79,12 +80,20 @@ async function loadEvents(id) {
         if (response.ok) {
             events = await response.json();
             let html = '';
+            let i = 0;
+            let innerHTML = '';
             events.forEach(
                 (event) => {
-                    html += getCard(event, 'event');
+
+                    if (!(i % 4) && i !== 0) {
+                        html += getRow(innerHTML);
+                        innerHTML = '';
+                    }
+                    innerHTML += getCard(event, 'event');
+                    i++;
                 }
             )
-            html = getRow(html);
+            html += getRow(innerHTML, true);
             $('#events').append(html);
         } else {
             //window.location.replace("./404.html");
@@ -108,7 +117,7 @@ async function loadServices(id) {
                     html += getCard(event, 'service');
                 }
             )
-            html = getRow(html);
+            html = getRow(html, true);
             $('#services').append(html);
         } else {
             //window.location.replace("./404.html");
@@ -169,3 +178,18 @@ $(async function () {
         });
     });
 });
+
+(function ($) {
+    "use strict";
+
+    // manual carousel controls
+    $('.next').click(function () {
+        $('.carousel').carousel('next');
+        return false;
+    });
+    $('.prev').click(function () {
+        $('.carousel').carousel('prev');
+        return false;
+    });
+
+})(jQuery);
