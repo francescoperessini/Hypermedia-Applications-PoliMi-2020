@@ -51,8 +51,7 @@ getCard = function (event, month) {
         "                        <path fill-rule=\"evenodd\" d=\"M6.5 7a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2z\" clip-rule=\"evenodd\"/>\n" +
         "                    </svg>  " + event_date + "\n" +
         "                        </div>\n" +
-        "                    <p class=\"card-text mt-3\">" + truncate(practical_info, 100) + "</p>" +
-        "                   <a class='btn btn-secondary' href='/pages/event.html?id=" + id + "&month=" + month + "'>Learn More</a>" +
+        "                   <a class='btn btn-secondary mt-2' href='/pages/event.html?id=" + id + "&month=" + month + "'>Learn More</a>" +
         "                </div>\n" +
         "            </div></div>"
 
