@@ -87,7 +87,7 @@ async function loadEvents(id) {
             html = getRow(html);
             $('#events').append(html);
         } else {
-            //window.location.replace("./404.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -111,7 +111,7 @@ async function loadServices(id) {
             html = getRow(html);
             $('#services').append(html);
         } else {
-            //window.location.replace("./404.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error
@@ -141,7 +141,7 @@ async function loadPersonList() {
             peopleList = await response.json();
 
         } else {
-            //window.location.replace("./404.html");
+            window.location.replace("./404.html");
         }
     } catch (e) {
         //Network error

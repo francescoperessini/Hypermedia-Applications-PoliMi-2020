@@ -33,7 +33,6 @@ async function getServices() {
                 console.log(content_html)
                 i++;
             })
-
             html = getRow(content_html)
             $("#servcices_container").html(html)
 
