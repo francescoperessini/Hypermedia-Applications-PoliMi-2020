@@ -12,7 +12,7 @@
  - Deliverable D2: the YAML or JSON file containing the specification of the app
   API can be found at [this address](https://martina-peressini-peresson.herokuapp.com/backend/spec.yaml).
  - Deliverable D3: the SwaggerUI page of the same API is available at
-  [this address](https://google.com).
+  [this address](https://martina-peressini-peresson.herokuapp.com/backend/swaggerui).
  - Deliverable D4: the source code of D0 is available as a zip file at
   [this address](https://google.com).
  - Deliverable D5: the address of the online source control repository is
