@@ -127,12 +127,13 @@ orientation info; jQuery scripting to enable dynamic HTML contents.
 (*) Please note that, for what concerning the Design part of the project, most of the work was done together during multiple 
 video call sessions.  
 ### Analysis of existing API
-Describe here the research of (full or part of) existing APIs that are similar in objectives and scope to the one implemented, that have possibly guided implementation choices (these should not be necessarily OpenAPI implementations). Toy APIs (such as the Swagger's Pet Store) or the example shown during lectures are not a valid response.
-Use TWO or more items of the form:
-> We took (full/partial) inspiration from API <XYZ>(link) for the part of the > API that manages <ABC> because of <REASON>.
-Or
-> For the part of the API that manages <ABC> we considered/studied <XYZ>(link) > because of <REASON> but wasn't completely fitting to our purpose because of > <REASON>.
+Every member of the team has previously developed a backend to serve endpoints to some Presentation layer (websites and 
+mobile applications) before this project, but we never used the Swagger Editor tool (that was quite a find for us!). 
+In addition to the examples presented during classes, we took full inspiration from [this tutorial](https://apihandyman.io/writing-openapi-swagger-specification-tutorial-part-1-introduction/): 
+it starts from the basic concepts till covering the most advanced topics concerning OpenAPI specification. 
+Of course, we took partial inspiration at the works done by our colleagues during the last years and available on GitHub. 
 
+For syntactic issues we referred to the official [OpenAPI Specification](https://swagger.io/specification/).
 ### Learning outcome
 What was the most important thing all the members have learned while developing this part of the project, what questions remained unanswered, how you will use what you've learned in your everyday life?
 
