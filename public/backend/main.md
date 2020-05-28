@@ -135,9 +135,14 @@ Of course, we took partial inspiration at the works done by our colleagues durin
 
 For syntactic issues we referred to the official [OpenAPI Specification](https://swagger.io/specification/).
 ### Learning outcome
-What was the most important thing all the members have learned while developing this part of the project, what questions remained unanswered, how you will use what you've learned in your everyday life?
+Francesco Peressini has learned the basics of HTML and CSS considering that it was the first time for him approaching this language; 
+he focused his attention on the backend part of the project learning Node.js, how to build a web application using Swagger and 
+how to use a query builder to retrieve data from a database.
 
-Examples:
+Stefano Martina has mastered his knowledge in HTML and CSS by implementing good-looking and responsive web pages using Bootstrap; 
+he learned how to use jQuery and AJAX for implementing dynamic page behaviours and how to build a web application using 
+the Swagger Editor tool.
 
-- Foo learned to write SQL queries and Javascript but wanted to know more about caching, he's probably going to create his own startup with what she has learned
-- Bar learned how to deploy on a cloud platform, he would have liked to know more about promises for asynchronous code..
+Tommaso Peresson has mastered his knowledge in HTML and CSS (previously learned during other courses); he focused his attention 
+in content responsiveness with the support of Bootstrap, on the implementation of dynamic page behaviours and on asynchronous programming 
+using JavaScript's Promises. 
