@@ -14,7 +14,7 @@
  - Deliverable D3: the SwaggerUI page of the same API is available at
   [this address](https://martina-peressini-peresson.herokuapp.com/backend/swaggerui).
  - Deliverable D4: the source code of D0 is available as a zip file at
-  [this address](https://google.com).
+  [this address](https://martina-peressini-peresson.herokuapp.com/backend/app.zip).
  - Deliverable D5: the address of the online source control repository is
   available [this address](https://github.com/francescoperessini/Hypermedia-Applications-PoliMi-2020). We hereby declare that this
   is a private repository and, upon request, we will give access to the
