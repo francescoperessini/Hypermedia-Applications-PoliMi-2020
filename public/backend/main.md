@@ -3,9 +3,9 @@
 ## General group information
 | Member n. | Role          | First name | Last Name | Matricola | Email address   |
 | --------- | ------------- | ---------- | --------- | --------- | --------------- |
-| 1 | Team leader | Francesco | Peressini | 10523034 | francesco.peressini@mail.polimi.it |
-| 2 | Member | Stefano | Martina | 10503949 | stefano.martina@mail.polimi.it |
-| 3 | Member | Tommaso | Peresson | 10526013 | tommaso.peresson@mail.polimi.it |
+| 1 | administrator | Francesco | Peressini | 10523034 | francesco.peressini@mail.polimi.it |
+| 2 | member | Stefano | Martina | 10503949 | stefano.martina@mail.polimi.it |
+| 3 | member | Tommaso | Peresson | 10526013 | tommaso.peresson@mail.polimi.it |
 
 ## Links to other deliverables
  - Deliverable D0: the web application is accessible at [this address](https://martina-peressini-peresson.herokuapp.com).
