@@ -1,0 +1,259 @@
+<html>
+<head>
+    <style>body {
+        color: black;
+    }
+    </style>
+</head>
+<body><h1 id="documentation-of-the-backend-part">Documentation of the Backend part</h1>
+<blockquote>
+    <p>Deliverable D1</p>
+</blockquote>
+<h2 id="general-group-information">General group information</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Member n.</th>
+        <th>Role</th>
+        <th>First name</th>
+        <th>Last Name</th>
+        <th>Matricola</th>
+        <th>Email address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>administrator</td>
+        <td>Francesco</td>
+        <td>Peressini</td>
+        <td>10523034</td>
+        <td>francesco.peressini@mail.polimi.it</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>member</td>
+        <td>Stefano</td>
+        <td>Martina</td>
+        <td>10503949</td>
+        <td>stefano.martina@mail.polimi.it</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>member</td>
+        <td>Tommaso</td>
+        <td>Peresson</td>
+        <td>10526013</td>
+        <td>tommaso.peresson@mail.polimi.it</td>
+    </tr>
+    </tbody>
+</table>
+<h2 id="links-to-other-deliverables">Links to other deliverables</h2>
+<ul>
+    <li>Deliverable D0: the web application is accessible at <a href="https://martina-peressini-peresson.herokuapp.com">this
+        address</a>.
+    </li>
+    <li>Deliverable D2: the YAML or JSON file containing the specification of the app
+        API can be found at <a href="https://martina-peressini-peresson.herokuapp.com/backend/spec.yaml">this
+            address</a>.
+    </li>
+    <li>Deliverable D3: the SwaggerUI page of the same API is available at
+        <a href="https://martina-peressini-peresson.herokuapp.com/backend/swaggerui">this address</a>.
+    </li>
+    <li>Deliverable D4: the source code of D0 is available as a zip file at
+        <a href="https://martina-peressini-peresson.herokuapp.com/backend/app.zip">this address</a>.
+    </li>
+    <li>Deliverable D5: the address of the online source control repository is
+        available <a href="https://github.com/francescoperessini/Hypermedia-Applications-PoliMi-2020">this address</a>.
+        We hereby declare that this
+        is a private repository and, upon request, we will give access to the
+        instructors.
+    </li>
+</ul>
+<h2 id="specification">Specification</h2>
+<h3 id="web-architecture">Web Architecture</h3>
+<p><img src="multi-tier.png" alt="Three tier architecture"></p>
+<p>The web architecture implemented is a three tier one: Presentation, Application and Data layers represent the three
+    different
+    actors which interact between them as shown in the picture above.</p>
+<p>More in detail, the Presentation layer presents data to the user by rendering HTML pages, both the static and the
+    dynamic part,
+    the Application layer interacts with the Presentation and the Data layers respectively responding to the API
+    requests received
+    by the client and retrieving data from the database. Finally, the Data layer represents the DBMS, in our case a
+    PostgreSQL database server.</p>
+<p>It is ensured that the HTML is rendered client side (in the Presentation layer) since the HTML pages are rendered
+    using an API schema.</p>
+<h3 id="api">API</h3>
+<h4 id="rest-compliance">REST compliance</h4>
+<p>We followed the main architectural constraints that describe a RESTful system: </p>
+<ul>
+    <li>Client-server architecture: the client can only interact with the server through its public exposed endpoints;
+        moreover,
+        the client and the server are able to work and evolve independently;
+    </li>
+    <li>Statelessness: no client information are stored on the server between requests: each request from any client
+        contains all the information necessary to service the request. No session information are stored to authenticate
+        the users;
+    </li>
+    <li>Cacheability: no caching mechanism has been implemented server side; content caching takes place only via the
+        browser;
+    </li>
+    <li>Code on demand: server only responds to the client&#39;s requests through static representation of the data
+        available in the
+        database (in the form of JSON files);
+    </li>
+    <li>Uniform interface: individual resources are identified in requests: the server sends data from its database as
+        JSON files without
+        exposing its internal representation; each message received by the client includes enough information to
+        describe how to
+        process the message.
+    </li>
+</ul>
+<h4 id="openapi-resource-models">OpenAPI Resource models</h4>
+<ul>
+    <li>Event: represents a generic event offered by the Association; it contains the ID of the event, its name, date
+        and time, a short presentation, some practical info, the skill
+        level required and the url of the associated image;
+    </li>
+    <li>Person: represents a member of the Association; it contains the ID of the person, and some personal information
+        like his/her name, surname, email, telephone,
+        leitmotiv, skills, a short description and the url of the associated image;
+    </li>
+    <li>Service: represents a generic service offered by the Association; it contains the ID of the service, its name,
+        a short presentation, some practical info, and an array of urls for the associated images;
+    </li>
+    <li>Error: represents the generic structure for the errors returned by the server; it contains the response code
+        (for example 400/404), and a short message to explain what went wrong with the request.
+    </li>
+</ul>
+<h3 id="data-model">Data model</h3>
+<p>Below are shown the ER diagram, and the Logical Design of the data layer used in our web application.</p>
+<p><img src="er.png" alt="ER"></p>
+<p><img src="logical.png" alt="Logical design"></p>
+<p>Except for the Error model, there is a 1 to 1 correspondence between the Event, Person and Service tables presented
+    above and
+    the correspondent OpenAPI resource models.</p>
+<h2 id="implementation">Implementation</h2>
+<h3 id="tools-used">Tools used</h3>
+<h4 id="environment">Environment</h4>
+<ul>
+    <li>Node.js: an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of
+        a web browser.
+    </li>
+</ul>
+<h4 id="tools">Tools</h4>
+<ul>
+    <li>WebStorm: a powerful and intelligent IDE that gives you the best coding assistance for JavaScript,
+        HTML and CSS and a wide range of modern web technologies. WebStorm is perfectly equipped for complex client-side
+        development and server-side development with Node.js;
+    </li>
+    <li>Database Tools and SQL (WebStorm plugin): a database plugin for IntelliJ-based IDEs providing support for all
+        the
+        features available in the standalone IDE for databases, DataGrip. It enables handling information stored in
+        relational
+        databases along with SQL language support;
+    </li>
+    <li>Swagger Editor: open source editor fully dedicated to OpenAPI-based APIs.The Swagger Editor is an easy way to
+        get started with the OpenAPI Specification (formerly known as Swagger), with support for Swagger 2.0 and OpenAPI
+        3.0.
+    </li>
+</ul>
+<h4 id="languages">Languages</h4>
+<ul>
+    <li>JavaScript.</li>
+</ul>
+<h4 id="frameworks-and-libraries">Frameworks and Libraries</h4>
+<ul>
+    <li>Knex.js: Knex.js is a &quot;batteries included&quot; SQL query builder for Postgres, MSSQL, MySQL, MariaDB,
+        SQLite3, Oracle,
+        and Amazon Redshift designed to be flexible, portable, and fun to use. It features both traditional
+        node style callbacks as well as a promise interface for cleaner async flow control, a stream interface,
+        full featured query and schema builders, transaction support (with savepoints), connection pooling and
+        standardized
+        responses between different query clients and dialects;
+    </li>
+    <li>serve-static: a Node.js library used to serve static content over HTTP.</li>
+</ul>
+<h3 id="discussion">Discussion</h3>
+<p>We started building our project from the OpenAPI specification generated by the Swagger Editor tool. During the
+    development
+    of the web application, we strictly followed the specification created, and we kept up to date the endpoints in
+    order to
+    satisfy some requirements not considered in the initial version of the OpenAPI specification (like, for example, the
+    error
+    handling process). We did not modify the structure generated by the Swagger Editor tool and, in particular, we only
+    manipulated
+    the code of the <em>Service</em> section of the server. We tested our endpoints through the &quot;Try it out!&quot;
+    feature offered by the
+    auto-generated documentation produced by Swagger: the results obtained was compared with the contents of the
+    database. </p>
+<p>As said before, our web application is partitioned in three layers: Presentation, Application and Data.
+    Static resources such as HTML pages are effectively separated from the Data layer and the information from the
+    database can
+    be retrieved by the frontend only through specific API calls to the exposed endpoints. </p>
+<p>Concerning the managing of the data model, we used a relational database management system; in particular, we
+    adopted PostgreSQL. </p>
+<h2 id="other-information">Other information</h2>
+<h3 id="task-assignment">Task assignment</h3>
+<p>The workload was divided equally between us: </p>
+<p>Francesco Peressini</p>
+<ul>
+    <li>Design: formalization of the IDM models, ER schema, wireframes and scenarios. (*)</li>
+    <li>Frontend: jQuery scripting to enable dynamic HTML contents.</li>
+    <li>Backend: APIs design; development of the assigned APIs and maintained the backend during the whole project;
+        database
+        maintenance.
+    </li>
+</ul>
+<p>Stefano Martina</p>
+<ul>
+    <li>Design: formalization of the IDM models, ER schema, wireframes and scenarios. (*)</li>
+    <li>Frontend: designed Homepage, Association, Services, Service, Events by Month pages; implemented shared elements
+        like
+        navigation bar and orientation info; jQuery scripting to enable dynamic HTML contents.
+    </li>
+    <li>Backend: APIs design.</li>
+</ul>
+<p>Tommaso Peresson</p>
+<ul>
+    <li>Design: formalization of the IDM models, ER schema, wireframes and scenarios. (*)</li>
+    <li>Frontend: designed Homepage, Events, Event, People, Person, 404 pages; implemented shared elements like footer
+        and
+        orientation info; jQuery scripting to enable dynamic HTML contents.
+    </li>
+    <li>Backend: APIs design.</li>
+</ul>
+<p>(*) Please note that, for what concerning the Design part of the project, most of the work was done together during
+    multiple
+    video call sessions. </p>
+<h3 id="analysis-of-existing-api">Analysis of existing API</h3>
+<p>Every member of the team has previously developed a backend to serve endpoints to some Presentation layer (websites
+    and
+    mobile applications) before this project, but we never used the Swagger Editor tool (that was quite a find for us!).
+    In addition to the examples presented during classes, we took full inspiration from <a
+            href="https://apihandyman.io/writing-openapi-swagger-specification-tutorial-part-1-introduction/">this
+        tutorial</a>:
+    it starts from the basic concepts till covering the most advanced topics concerning OpenAPI specification.
+    Of course, we took partial inspiration at the works done by our colleagues during the last years and available on
+    GitHub. </p>
+<p>For syntactic issues we referred to the official <a href="https://swagger.io/specification/">OpenAPI
+    Specification</a>.</p>
+<h3 id="learning-outcome">Learning outcome</h3>
+<p>Francesco Peressini has learned the basics of HTML and CSS considering that it was the first time for him approaching
+    this language;
+    he focused his attention on the backend part of the project learning Node.js, how to build a web application using
+    Swagger and
+    how to use a query builder to retrieve data from a database.</p>
+<p>Stefano Martina has mastered his knowledge in HTML and CSS by implementing good-looking and responsive web pages
+    using Bootstrap;
+    he learned how to use jQuery and AJAX for implementing dynamic page behaviours and how to build a web application
+    using
+    the Swagger Editor tool.</p>
+<p>Tommaso Peresson has mastered his knowledge in HTML and CSS (previously learned during other courses); he focused his
+    attention
+    in content responsiveness with the support of Bootstrap, on the implementation of dynamic page behaviours and on
+    asynchronous programming
+    using JavaScript&#39;s Promises. </p>
+</body>
+</html>
