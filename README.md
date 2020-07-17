@@ -7,6 +7,8 @@
     <img src="https://i.imgur.com/mPb3Qbd.gif" width="180" alt="Politecnico di Milano"/>
 </p>
 
+## Description ##
+Website developed for the course of "Hypermedia Applications (Web and Multimedia)" at Politecnico di Milano, A.Y. 2019/2020. 
 
 ## Contributors ##
 
